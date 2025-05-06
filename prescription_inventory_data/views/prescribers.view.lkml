@@ -17,12 +17,18 @@ view: prescribers {
     sql: ${TABLE}.prescriber_email ;;
   }
   dimension: prescriber_first_name {
+    hidden: yes
     type: string
     sql: ${TABLE}.prescriber_first_name ;;
   }
   dimension: prescriber_last_name {
+    hidden: yes
     type: string
     sql: ${TABLE}.prescriber_last_name ;;
+  }
+  dimension: prescriber_name {
+    type: string
+    sql: CONCAT(${prescriber_first_name}, ' ', ${prescriber_last_name}) ;;
   }
   dimension: prescriber_npi {
     type: number
@@ -41,6 +47,7 @@ view: prescribers {
     sql: ${TABLE}.prescriber_zipcode ;;
   }
   dimension_group: record_created {
+    label: "Prescriber Joined"
     type: time
     timeframes: [raw, time, date, week, month, quarter, year]
     sql: ${TABLE}.record_created_at ;;
@@ -53,5 +60,10 @@ view: prescribers {
   measure: count {
     label: "# of Prescribers (Doctors)"
     type: count
+  }
+  measure: prescribers_running_total {
+    label: "Prescribers Running Total"
+    type: running_total
+    sql: ${count} ;;
   }
 }

@@ -56,11 +56,22 @@ view: prescriptions {
   }
   dimension_group: written {
     type: time
-    timeframes: [raw, date, week, month, quarter, year]
+    # timeframes: [raw, date, week, month, quarter, year]
     convert_tz: no
     datatype: date
     sql: ${TABLE}.written_at ;;
   }
+
+  # dimension_group: current_date {
+  #   hidden: yes
+  #   type: time
+  #   sql: CURRENT_DATE ;;
+  # }
+
+  # dimension: written_is_month_to_date {
+  #   type: yesno
+  #   sql: ;;
+  # }
   measure: count {
     label: "# of Prescriptions"
     type: count

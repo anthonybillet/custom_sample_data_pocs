@@ -3,6 +3,7 @@ connection: "argolis"
 include: "/prescription_inventory_data/views/*.view.lkml"
 
 explore: patients {
+  label: "Prescriptions, Patients, Orders, and Cases"
   join: prescribers {
     type: left_outer
     sql_on: ${prescribers.prescriber_id} = ${prescriptions.prescriber_id} ;;
