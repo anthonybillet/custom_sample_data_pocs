@@ -30,6 +30,12 @@ view: prescriptions {
   dimension: prescribed_drug_name {
     type: string
     sql: ${TABLE}.prescribed_drug_name ;;
+    link: {
+      label: "Drug Lookup: {{value}}"
+      url: "https://www.drugs.com/search.php?searchterm={{value | url_encode}}"
+      icon_url: "https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.gifthealth.com/"
+
+    }
   }
   dimension: prescribed_drug_ndc {
     type: string

@@ -45,6 +45,7 @@ view: shipments {
     sql: ${TABLE}.shipment_method ;;
   }
   dimension: status {
+    label: "Shipment Status"
     type: string
     sql: ${TABLE}.status ;;
   }

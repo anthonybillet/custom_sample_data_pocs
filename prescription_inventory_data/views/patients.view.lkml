@@ -11,12 +11,24 @@ view: patients {
     primary_key: yes
     type: number
     sql: ${TABLE}.patient_id ;;
+
+    link: {
+      label: "Patient Lookup"
+      url: "/dashboards/4GvbCKwuuG2i31wgQRq0Jb?Patient+ID={{value}}"
+      icon_url: "https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.gifthealth.com/"
+    }
   }
 
   dimension: patient_id_string {
     order_by_field: patient_id
     type: string
     sql: CAST(${patient_id} AS string) ;;
+
+    link: {
+      label: "Patient Lookup"
+      url: "/dashboards/4GvbCKwuuG2i31wgQRq0Jb?Patient+ID={{value}}"
+      icon_url: "https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.gifthealth.com/"
+    }
   }
   dimension: address {
     required_access_grants: [can_see_patient_pii]
@@ -61,6 +73,11 @@ view: patients {
     required_access_grants: [can_see_patient_pii]
     type: string
     sql: CONCAT(${patient_first_name}, ' ', ${patient_last_name}) ;;
+    link: {
+      label: "Patient Lookup"
+      url: "/dashboards/4GvbCKwuuG2i31wgQRq0Jb?Patient+ID={{patient_id._value}}"
+      icon_url: "https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.gifthealth.com/"
+    }
   }
   dimension_group: record_created {
     label: "Patient Joined"

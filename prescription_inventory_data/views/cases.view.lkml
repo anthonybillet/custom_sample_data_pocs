@@ -33,6 +33,7 @@ view: cases {
     sql: ${TABLE}.patient_id ;;
   }
   dimension_group: record_created {
+    label: "Case Created"
     type: time
     timeframes: [raw, time, date, week, month, quarter, year]
     sql: ${TABLE}.record_created_at ;;
