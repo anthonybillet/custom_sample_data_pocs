@@ -1,5 +1,6 @@
 view: shipments {
-  sql_table_name: `ant-billet-looker-core-argolis.sample_prescription_inventory_data.shipments` ;;
+  # sql_table_name: `ant-billet-looker-core-argolis.sample_prescription_inventory_data.shipments` ;;
+  sql_table_name: `ant-billet-looker-core-argolis.sample_prescription_inventory_data.shipments_v2` ;;
   drill_fields: [shipment_id]
 
   dimension: shipment_id {

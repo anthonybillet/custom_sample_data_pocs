@@ -1,5 +1,6 @@
 view: prescriptions {
-  sql_table_name: `ant-billet-looker-core-argolis.sample_prescription_inventory_data.prescriptions` ;;
+  # sql_table_name: `ant-billet-looker-core-argolis.sample_prescription_inventory_data.prescriptions` ;;
+  sql_table_name: `ant-billet-looker-core-argolis.sample_prescription_inventory_data.prescriptions_v2` ;;
   drill_fields: [prescription_id]
 
   dimension: prescription_id {

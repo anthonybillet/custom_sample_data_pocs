@@ -4,7 +4,8 @@ access_grant: can_see_patient_pii {
 }
 
 view: patients {
-  sql_table_name: `ant-billet-looker-core-argolis.sample_prescription_inventory_data.patients` ;;
+  # sql_table_name: `ant-billet-looker-core-argolis.sample_prescription_inventory_data.patients` ;;
+  sql_table_name: `ant-billet-looker-core-argolis.sample_prescription_inventory_data.patients_v2` ;;
   drill_fields: [patient_id]
 
   dimension: patient_id {

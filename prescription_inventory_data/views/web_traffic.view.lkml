@@ -1,6 +1,7 @@
 view: web_traffic {
   label: "Web Events"
-  sql_table_name: `ant-billet-looker-core-argolis.sample_prescription_inventory_data.web_traffic` ;;
+  # sql_table_name: `ant-billet-looker-core-argolis.sample_prescription_inventory_data.web_traffic` ;;
+  sql_table_name: `ant-billet-looker-core-argolis.sample_prescription_inventory_data.web_traffic_v2` ;;
 
   dimension: device_type {
     type: string
@@ -31,7 +32,7 @@ view: web_traffic {
   dimension: patient_id {
     type: string
     hidden: yes
-    sql: ${TABLE}.patient_id ;;
+    sql: CAST( CASE WHEN ${TABLE}.patient_id = 'NULL' THEN NULL ELSE ${TABLE}.patient_id END AS INT64) ;;
   }
   dimension_group: record_created {
     type: time

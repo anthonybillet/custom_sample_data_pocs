@@ -1,5 +1,6 @@
 view: cases {
-  sql_table_name: `ant-billet-looker-core-argolis.sample_prescription_inventory_data.cases` ;;
+  # sql_table_name: `ant-billet-looker-core-argolis.sample_prescription_inventory_data.cases` ;;
+  sql_table_name: `ant-billet-looker-core-argolis.sample_prescription_inventory_data.cases_v2` ;;
 
   dimension: case_id {
     primary_key: yes
