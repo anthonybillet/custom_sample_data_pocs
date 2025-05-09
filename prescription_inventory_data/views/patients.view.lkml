@@ -96,6 +96,7 @@ view: patients {
     sql: ${TABLE}.state ;;
   }
   dimension: zipcode {
+    required_access_grants: [can_see_patient_pii]
     type: zipcode
     sql: CAST(${TABLE}.zipcode as string) ;;
   }
