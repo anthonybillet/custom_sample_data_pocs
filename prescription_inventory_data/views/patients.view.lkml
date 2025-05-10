@@ -6,7 +6,6 @@ access_grant: can_see_patient_pii {
 view: patients {
   # sql_table_name: `ant-billet-looker-core-argolis.sample_prescription_inventory_data.patients` ;;
   sql_table_name: `ant-billet-looker-core-argolis.sample_prescription_inventory_data.patients_v2` ;;
-  drill_fields: [patient_id]
 
   dimension: patient_id {
     primary_key: yes
@@ -46,6 +45,7 @@ view: patients {
     sql: ${TABLE}.gender ;;
   }
   dimension: medication_compliance_rate {
+    value_format_name: percent_0
     type: number
     sql: ${TABLE}.medication_compliance_rate ;;
   }
@@ -87,6 +87,7 @@ view: patients {
     sql: ${TABLE}.record_created_at ;;
   }
   dimension_group: record_updated {
+    hidden: yes
     type: time
     timeframes: [raw, time, date, week, month, quarter, year]
     sql: ${TABLE}.record_updated_at ;;
@@ -101,9 +102,22 @@ view: patients {
     type: zipcode
     sql: CAST(${TABLE}.zipcode as string) ;;
   }
+
+
   measure: count {
     label: "# of Patients"
     type: count
+  }
+  measure: average_medication_compliance_rate {
+    type: average
+    value_format_name: percent_0
+    sql: ${medication_compliance_rate} ;;
+  }
+
+  drill_fields: [patient_details*,prescriptions.count,fill_requests.count,orders.count, cases.count]
+
+  set: patient_details {
+    fields: [patient_id,patient_name, record_created_date, gender, patient_dob_date, address,city,state,zipcode]
   }
 
 }

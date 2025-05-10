@@ -1,7 +1,6 @@
 view: prescriptions {
   # sql_table_name: `ant-billet-looker-core-argolis.sample_prescription_inventory_data.prescriptions` ;;
   sql_table_name: `ant-billet-looker-core-argolis.sample_prescription_inventory_data.prescriptions_v2` ;;
-  drill_fields: [prescription_id]
 
   dimension: prescription_id {
     primary_key: yes
@@ -9,6 +8,7 @@ view: prescriptions {
     sql: ${TABLE}.prescription_id ;;
   }
   dimension: icd_diagnosis_codes {
+    label: "ICD Diagnosis Codes"
     type: string
     sql: ${TABLE}.icd_diagnosis_codes ;;
   }
@@ -17,6 +17,7 @@ view: prescriptions {
     sql: ${TABLE}.number_refills ;;
   }
   dimension_group: original {
+    hidden: yes
     type: time
     timeframes: [raw, date, week, month, quarter, year]
     convert_tz: no
@@ -39,6 +40,7 @@ view: prescriptions {
     }
   }
   dimension: prescribed_drug_ndc {
+    label: "Prescribed Drug NDC"
     type: string
     sql: ${TABLE}.prescribed_drug_ndc ;;
   }
@@ -48,11 +50,13 @@ view: prescriptions {
     sql: ${TABLE}.prescriber_id ;;
   }
   dimension_group: record_created {
+    hidden: yes
     type: time
     timeframes: [raw, time, date, week, month, quarter, year]
     sql: ${TABLE}.record_created_at ;;
   }
   dimension_group: record_updated {
+    hidden: yes
     type: time
     timeframes: [raw, time, date, week, month, quarter, year]
     sql: ${TABLE}.record_updated_at ;;
@@ -61,9 +65,9 @@ view: prescriptions {
     type: string
     sql: ${TABLE}.rx_source ;;
   }
-  dimension_group: written {
+  dimension_group: written_at {
     type: time
-    # timeframes: [raw, date, week, month, quarter, year]
+    timeframes: [raw, date, week, month, quarter, year]
     convert_tz: no
     datatype: date
     sql: ${TABLE}.written_at ;;
@@ -82,6 +86,12 @@ view: prescriptions {
   measure: count {
     label: "# of Prescriptions"
     type: count
+  }
+
+  drill_fields: [prescription_details*,fill_requests.count]
+
+  set: prescription_details {
+    fields: [prescription_id,prescribed_drug_name, prescribed_drug_ndc,icd_diagnosis_codes,written_at_date,rx_source]
   }
 
 }

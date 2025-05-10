@@ -35,17 +35,24 @@ view: web_traffic {
     sql: CAST( CASE WHEN ${TABLE}.patient_id = 'NULL' THEN NULL ELSE ${TABLE}.patient_id END AS INT64) ;;
   }
   dimension_group: record_created {
+    hidden: yes
     type: time
     timeframes: [raw, time, date, week, month, quarter, year]
     sql: ${TABLE}.record_created_at ;;
   }
   dimension_group: record_updated {
+    hidden: yes
     type: time
     timeframes: [raw, time, date, week, month, quarter, year]
     sql: ${TABLE}.record_updated_at ;;
   }
 
-  drill_fields: [event_id]
+  drill_fields: [event_details*]
+
+  set: event_details {
+    fields: [event_id,event_type,page_url, page_source, device_type, event_time]
+  }
+
   measure: count {
     label: "# of Events"
     type: count

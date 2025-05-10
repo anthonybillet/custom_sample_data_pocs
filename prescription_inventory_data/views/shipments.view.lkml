@@ -1,7 +1,6 @@
 view: shipments {
   # sql_table_name: `ant-billet-looker-core-argolis.sample_prescription_inventory_data.shipments` ;;
   sql_table_name: `ant-billet-looker-core-argolis.sample_prescription_inventory_data.shipments_v2` ;;
-  drill_fields: [shipment_id]
 
   dimension: shipment_id {
     primary_key: yes
@@ -19,11 +18,13 @@ view: shipments {
     sql: ${TABLE}.fill_request_id ;;
   }
   dimension_group: record_created {
+    hidden: yes
     type: time
     timeframes: [raw, time, date, week, month, quarter, year]
     sql: ${TABLE}.record_created_at ;;
   }
   dimension_group: record_updated {
+    hidden: yes
     type: time
     timeframes: [raw, time, date, week, month, quarter, year]
     sql: ${TABLE}.record_updated_at ;;
@@ -51,11 +52,18 @@ view: shipments {
     sql: ${TABLE}.status ;;
   }
   dimension: zip_code_3 {
+    label: "Zipcode"
     type: number
     sql: ${TABLE}.zip_code_3 ;;
   }
   measure: count {
     label: "# of Shipments"
     type: count
+  }
+
+  drill_fields: [shipment_details*]
+
+  set: shipment_details {
+    fields: [shipment_id,shipment_method,shipment_time,delivered_time]
   }
 }

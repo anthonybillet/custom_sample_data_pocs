@@ -1,7 +1,6 @@
 view: fill_requests {
   # sql_table_name: `ant-billet-looker-core-argolis.sample_prescription_inventory_data.fill_requests` ;;
   sql_table_name: `ant-billet-looker-core-argolis.sample_prescription_inventory_data.fill_requests_v2` ;;
-  drill_fields: [fill_request_id]
 
   dimension: fill_request_id {
     primary_key: yes
@@ -36,11 +35,13 @@ view: fill_requests {
     sql: ${TABLE}.prescription_id ;;
   }
   dimension_group: record_created {
+    hidden: yes
     type: time
     timeframes: [raw, time, date, week, month, quarter, year]
     sql: ${TABLE}.record_created_at ;;
   }
   dimension_group: record_updated {
+    hidden: yes
     type: time
     timeframes: [raw, time, date, week, month, quarter, year]
     sql: ${TABLE}.record_updated_at ;;
@@ -56,6 +57,15 @@ view: fill_requests {
       fill_request_status: "Filled"
     ]
   }
+
+  measure: incomplete_fill_requests {
+    label: "# of Incomplete Fill Requests"
+    type: count
+    filters: [
+      fill_request_status: "-Filled"
+    ]
+  }
+
   measure: fill_request_completion_rate {
     type: number
     value_format_name: percent_1
@@ -69,7 +79,6 @@ view: fill_requests {
     group_label: "Fill Request Funnel"
     type: count
     filters: [fill_request_time: "-NULL"]
-    drill_fields: [fill_request_funnel_details*]
   }
 
   measure: count_fill_request_created_and_completed {
@@ -77,7 +86,6 @@ view: fill_requests {
     group_label: "Fill Request Funnel"
     type: count
     filters: [fill_request_time: "-NULL", fill_completed_time: "-NULL"]
-    drill_fields: [fill_request_funnel_details*]
   }
 
   measure: count_fill_request_created_and_completed_and_shipped {
@@ -85,7 +93,6 @@ view: fill_requests {
     group_label: "Fill Request Funnel"
     type: count
     filters: [fill_request_time: "-NULL", fill_completed_time: "-NULL", shipments.shipment_time: "-NULL"]
-    drill_fields: [fill_request_funnel_details*]
   }
 
   measure: count_fill_request_created_and_completed_and_shipped_and_delivered {
@@ -93,14 +100,13 @@ view: fill_requests {
     group_label: "Fill Request Funnel"
     type: count
     filters: [fill_request_time: "-NULL", fill_completed_time: "-NULL", shipments.shipment_time: "-NULL", shipments.delivered_date: "-NULL"]
-    drill_fields: [fill_request_funnel_details*]
   }
 
+  drill_fields: [fill_request_details*]
 
-  set: fill_request_funnel_details {
-    fields: [fill_request_id,fill_request_status,prescriptions.prescribed_drug_name, prescribers.prescriber_namepatients.patient_name,fill_request_time,fill_completed_time, shipments.shipment_time,shipments.delivered_date]
+  set: fill_request_details {
+    fields: [fill_request_id,fill_request_status, dispensed_quantity,prescriptions.prescribed_drug_name, prescribers.prescriber_namepatients.patient_name,fill_request_time,fill_completed_time, shipments.shipment_time,shipments.delivered_date, orders.count]
   }
-
 
 
 

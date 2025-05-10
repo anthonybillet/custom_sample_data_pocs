@@ -40,6 +40,7 @@ view: cases {
     sql: ${TABLE}.record_created_at ;;
   }
   dimension_group: record_updated {
+    hidden: yes
     type: time
     timeframes: [raw, time, date, week, month, quarter, year]
     sql: ${TABLE}.record_updated_at ;;
@@ -49,7 +50,11 @@ view: cases {
     sql: ${TABLE}.resolution_method ;;
   }
 
-  drill_fields: [case_id]
+  drill_fields: [case_details*]
+
+  set: case_details {
+    fields: [case_id,patient_id,patients.patient_name, record_created_time, case_status, case_type,case_outcome,case_details]
+  }
 
   measure: count {
     label: "# of Cases"
