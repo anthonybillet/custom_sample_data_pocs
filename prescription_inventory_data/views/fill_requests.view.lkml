@@ -72,6 +72,114 @@ view: fill_requests {
     sql: 1.0*${completed_fill_requests}/NULLIF(${count},0) ;;
   }
 
+
+  ### durations ###
+
+  dimension: fill_request_to_completed_duration_min {
+    group_label: "Fill Request Durations"
+    label: "Step 1: Requested -> Filled Duration (Minutes)"
+    hidden: yes
+    type: duration_minute
+    sql_start: ${fill_request_raw} ;;
+    sql_end: ${fill_completed_raw} ;;
+  }
+
+  dimension: fill_request_to_completed_duration_hr {
+    group_label: "Fill Request Durations"
+    hidden: yes
+    label: "Step 1: Requested -> Filled Duration (Hours)"
+    type: number
+    value_format_name: decimal_1
+    sql: 1.0* ${fill_request_to_completed_duration_min}/60 ;;
+  }
+
+  measure: average_fill_request_to_completed_duration_hr {
+    group_label: "Fill Request Durations"
+    label: "Step 1: Requested -> Filled Duration (Hours)"
+    type: average
+    value_format_name: decimal_1
+    sql:  ${fill_request_to_completed_duration_hr};;
+  }
+
+  dimension: fill_request_completed_shipment_created_duration_min {
+    group_label: "Fill Request Durations"
+    label: "Step 2: Filled -> Shipped Duration (Minutes)"
+    hidden: yes
+    type: duration_minute
+    sql_start: ${fill_completed_raw} ;;
+    sql_end: ${shipments.shipment_raw} ;;
+  }
+
+  dimension: fill_request_completed_shipment_created_duration_hr {
+    group_label: "Fill Request Durations"
+    label: "Step 2: Filled -> Shipped Duration (Hours)"
+    hidden: yes
+    type: number
+    value_format_name: decimal_1
+    sql: 1.0* ${fill_request_completed_shipment_created_duration_min}/60 ;;
+  }
+
+  measure: average_fill_request_completed_shipment_created_duration_hr {
+    group_label: "Fill Request Durations"
+    label: "Step 2: Filled -> Shipped Duration (Hours)"
+    type: average
+    value_format_name: decimal_1
+    sql:  ${fill_request_completed_shipment_created_duration_hr};;
+  }
+
+  dimension: shipped_delivered_min {
+    group_label: "Fill Request Durations"
+    label: "Step 3: Shipped -> Delivered Duration (Minutes)"
+    hidden: yes
+    type: duration_minute
+    sql_start: ${shipments.shipment_raw} ;;
+    sql_end: ${shipments.delivered_raw} ;;
+  }
+
+  dimension: shipped_delivered_hr {
+    group_label: "Fill Request Durations"
+    label: "Step 3: Shipped -> Delivered Duration (Hours)"
+    hidden: yes
+    type: number
+    value_format_name: decimal_1
+    sql: 1.0* ${shipped_delivered_min}/60 ;;
+  }
+
+  measure: average_shipped_delivered_hr {
+    group_label: "Fill Request Durations"
+    label: "Step 3: Shipped -> Delivered Duration (Hours)"
+    type: average
+    value_format_name: decimal_1
+    sql:  ${shipped_delivered_hr};;
+  }
+
+  dimension: request_delivered_min {
+    group_label: "Fill Request Durations"
+    label: " Full Journey: Requested -> Delivered Duration (Minutes)"
+    hidden: yes
+    type: duration_minute
+    sql_start: ${fill_request_raw} ;;
+    sql_end: ${shipments.delivered_raw} ;;
+  }
+
+  dimension: request_delivered_hr {
+    group_label: "Fill Request Durations"
+    label: " Full Journey: Requested -> Delivered Duration (Hours)"
+    hidden: yes
+    type: number
+    value_format_name: decimal_1
+    sql: 1.0* ${request_delivered_min}/60 ;;
+  }
+
+  measure: average_request_delivered_hr {
+    group_label: "Fill Request Durations"
+    label: " Full Journey: Requested -> Delivered Duration (Hours)"
+    type: average
+    value_format_name: decimal_1
+    sql:  ${request_delivered_hr};;
+  }
+
+
   #### Funnel Analysis ####
 
   measure: count_fill_request_created {
@@ -105,7 +213,7 @@ view: fill_requests {
   drill_fields: [fill_request_details*]
 
   set: fill_request_details {
-    fields: [fill_request_id,fill_request_status, dispensed_quantity,prescriptions.prescribed_drug_name, prescribers.prescriber_namepatients.patient_name,fill_request_time,fill_completed_time, shipments.shipment_time,shipments.delivered_date, orders.count]
+    fields: [fill_request_id,fill_request_status, dispensed_quantity,prescriptions.prescribed_drug_name, prescribers.prescriber_namepatients.patient_name,request_delivered_hr,fill_request_time,fill_request_to_completed_duration_hr,fill_completed_time, fill_request_completed_shipment_created_duration_hr,shipments.shipment_time,shipped_delivered_hr,shipments.delivered_date, orders.count]
   }
 
 
