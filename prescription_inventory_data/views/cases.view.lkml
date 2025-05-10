@@ -6,6 +6,11 @@ view: cases {
     primary_key: yes
     type: number
     sql: ${TABLE}.case_id ;;
+    link: {
+      label: "Lookup in Support Portal: Case: {{value}}"
+      url: "https://www.google.com/search?q=case{{value}}"
+      icon_url: "https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.gifthealth.com/"
+    }
   }
   dimension: case_details {
     type: string
