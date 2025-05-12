@@ -217,7 +217,7 @@ view: fill_requests {
   drill_fields: [fill_request_details*]
 
   set: fill_request_details {
-    fields: [fill_request_id,fill_request_status, dispensed_quantity,prescriptions.prescribed_drug_name, prescribers.prescriber_namepatients.patient_name,request_delivered_hr,fill_request_time,fill_request_to_completed_duration_hr,fill_completed_time, fill_request_completed_shipment_created_duration_hr,shipments.shipment_time,shipped_delivered_hr,shipments.delivered_date, orders.count]
+    fields: [fill_request_id,fill_request_status,prescriptions.prescribed_drug_name,dispensed_quantity, prescribers.prescriber_namepatients.patient_name,fill_request_time,fill_completed_time,shipments.shipment_time,shipments.delivered_date, orders.count]
   }
 
 
