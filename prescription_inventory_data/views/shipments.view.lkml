@@ -49,7 +49,7 @@ view: shipments {
   dimension: status {
     label: "Shipment Status"
     type: string
-    sql: ${TABLE}.status ;;
+    sql: CASE WHEN ${TABLE}.status IS NULL THEN 'Not Shipped' ELSE ${TABLE}.status END ;;
   }
   dimension: zip_code_3 {
     label: "Zipcode"
