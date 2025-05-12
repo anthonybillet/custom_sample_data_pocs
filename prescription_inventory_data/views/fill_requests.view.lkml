@@ -96,6 +96,7 @@ view: fill_requests {
   measure: average_fill_request_to_completed_duration_hr {
     group_label: "Fill Request Durations"
     label: "Step 1: Requested -> Filled Duration (Hours)"
+    description: "Average duration in hours from the moment a fill request is created by the client until it is completed by us"
     type: average
     value_format_name: decimal_1
     sql:  ${fill_request_to_completed_duration_hr};;
@@ -122,6 +123,7 @@ view: fill_requests {
   measure: average_fill_request_completed_shipment_created_duration_hr {
     group_label: "Fill Request Durations"
     label: "Step 2: Filled -> Shipped Duration (Hours)"
+    description: "Average duration in hours from the moment a fill request is completed until it is shipped"
     type: average
     value_format_name: decimal_1
     sql:  ${fill_request_completed_shipment_created_duration_hr};;
@@ -148,6 +150,7 @@ view: fill_requests {
   measure: average_shipped_delivered_hr {
     group_label: "Fill Request Durations"
     label: "Step 3: Shipped -> Delivered Duration (Hours)"
+    description: "Average duration in hours from the moment a fill request is shipped until it is delivered to the client"
     type: average
     value_format_name: decimal_1
     sql:  ${shipped_delivered_hr};;
@@ -174,6 +177,7 @@ view: fill_requests {
   measure: average_request_delivered_hr {
     group_label: "Fill Request Durations"
     label: " Full Journey: Requested -> Delivered Duration (Hours)"
+    description: "Average duration in hours from the moment a fill request is created by the client until it is delivered to the client"
     type: average
     value_format_name: decimal_1
     sql:  ${request_delivered_hr};;

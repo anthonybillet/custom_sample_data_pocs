@@ -32,6 +32,8 @@ view: prescribers {
     sql: CONCAT(${prescriber_first_name}, ' ', ${prescriber_last_name}) ;;
   }
   dimension: prescriber_npi {
+    description: "this is the NPI number of the Doctor"
+    tags: ["doctor","provider"]
     label: "Prescriber NPI"
     type: number
     sql: ${TABLE}.prescriber_npi ;;
