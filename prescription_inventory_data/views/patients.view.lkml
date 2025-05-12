@@ -62,6 +62,7 @@ view: patients {
     hidden: yes
     type: string
     sql: ${TABLE}.patient_first_name ;;
+
   }
   dimension: patient_last_name {
     required_access_grants: [can_see_patient_pii]
@@ -78,6 +79,33 @@ view: patients {
       label: "Patient Lookup"
       url: "/dashboards/4GvbCKwuuG2i31wgQRq0Jb?Patient+ID={{patient_id._value}}"
       icon_url: "https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.gifthealth.com/"
+    }
+
+    action: {
+      label: "Reach out to {{value}}"
+      url: "https://desolate-refuge-53336.herokuapp.com/posts"
+      icon_url: "https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.gifthealth.com/"
+      param: {
+        name: "some_auth_code"
+        value: "abc123456"
+      }
+      form_param: {
+        name: "Subject"
+        required: yes
+        default: "News from your Health Team"
+      }
+      form_param: {
+        name: "Body"
+        type: textarea
+        required: yes
+        default:
+        "Dear {{ value }},
+
+        We are reaching out to you because ...
+
+        Sincerely,
+        Your Health Care Team"
+      }
     }
   }
   dimension_group: record_created {
