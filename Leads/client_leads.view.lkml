@@ -1,5 +1,5 @@
-view: client_a_leads {
-  sql_table_name: `ant-billet-looker-core-argolis.sample_data.client_a_leads` ;;
+view: client_leads {
+  sql_table_name: `ant-billet-looker-core-argolis.sample_data.{{ _user_attributes['client_lead_table'] }}_leads` ;;
 
   dimension_group: created {
     type: time
@@ -15,6 +15,13 @@ view: client_a_leads {
     sql: ${TABLE}.lead_score ;;
   }
   measure: count {
+    label: "# of Leads"
     type: count
+  }
+
+  measure: average_lead_score {
+    type: average
+    sql: ${lead_score} ;;
+    value_format_name: decimal_3
   }
 }

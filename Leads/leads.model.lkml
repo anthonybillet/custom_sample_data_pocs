@@ -8,3 +8,5 @@ explore: all_client_leads {
     field: client_id
   }
 }
+
+explore: client_leads {}

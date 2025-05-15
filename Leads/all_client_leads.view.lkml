@@ -26,6 +26,7 @@ view: all_client_leads {
   measure: average_lead_score {
     type: average
     sql: ${lead_score} ;;
+    value_format_name: decimal_3
   }
 
 
