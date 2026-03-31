@@ -54,6 +54,7 @@ view: fact_daily_social {
     sql: ${TABLE}.video_views ;;
     value_format_name: decimal_0
     description: "Total impressions/views of videos featuring the track audio."
+    drill_fields: [social_drill_details*]
   }
 
   measure: total_ugc_creations {
@@ -61,12 +62,14 @@ view: fact_daily_social {
     sql: ${TABLE}.ugc_creations ;;
     value_format_name: decimal_0
     description: "Count of User Generated Content videos created using the track audio (highly correlated to virality)."
+    drill_fields: [social_drill_details*]
   }
 
   measure: total_shares {
     type: sum
     sql: ${TABLE}.shares ;;
     value_format_name: decimal_0
+    drill_fields: [social_drill_details*]
   }
 
   measure: viral_engagement_rate {
@@ -74,5 +77,19 @@ view: fact_daily_social {
     sql: 1.0 * (${total_shares} + ${total_ugc_creations}) / NULLIF(${total_video_views}, 0) ;;
     value_format_name: percent_2
     description: "Measures virality depth: (Shares + UGC Creations) divided by Total Views. Standard Interscope viral metric."
+    drill_fields: [social_drill_details*]
+  }
+
+  # --- Drill Sets ---
+  set: social_drill_details {
+    fields: [
+      date_date,
+      platform_name,
+      dim_artists.artist_name,
+      dim_tracks.track_title,
+      total_video_views,
+      total_ugc_creations,
+      viral_engagement_rate
+    ]
   }
 }

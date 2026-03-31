@@ -53,6 +53,7 @@ view: fact_merch_orders {
     type: count_distinct
     sql: ${order_id} ;;
     description: "Count of unique merch orders."
+    drill_fields: [merch_drill_details*]
   }
 
   measure: total_gross_revenue {
@@ -60,6 +61,7 @@ view: fact_merch_orders {
     sql: ${TABLE}.gross_revenue ;;
     value_format_name: usd
     description: "Total top-line revenue from Direct-to-Consumer merch sales."
+    drill_fields: [merch_drill_details*]
   }
 
   measure: total_net_margin_dollars {
@@ -67,6 +69,7 @@ view: fact_merch_orders {
     sql: ${TABLE}.net_margin ;;
     value_format_name: usd
     description: "Total profit after costs (Gross Revenue - COGS)."
+    drill_fields: [merch_drill_details*]
   }
 
   # --- Complex Business Logic for Demo ---
@@ -75,6 +78,7 @@ view: fact_merch_orders {
     sql: 1.0 * ${total_net_margin_dollars} / NULLIF(${total_gross_revenue}, 0) ;;
     value_format_name: percent_2
     description: "Margin percentage on D2C sales. Critical metric for the CFO."
+    drill_fields: [merch_drill_details*]
   }
 
   measure: average_revenue_per_fan {
@@ -82,5 +86,18 @@ view: fact_merch_orders {
     sql: 1.0 * ${total_gross_revenue} / NULLIF(COUNT(DISTINCT ${fan_id}), 0) ;;
     value_format_name: usd
     description: "ARPU (Average Revenue Per User) for Superfans buying merch."
+    drill_fields: [merch_drill_details*]
+  }
+
+  # --- Drill Sets ---
+  set: merch_drill_details {
+    fields: [
+      order_date,
+      dim_artists.artist_name,
+      dim_fans.country,
+      item_category,
+      total_gross_revenue,
+      gross_margin_percentage
+    ]
   }
 }
