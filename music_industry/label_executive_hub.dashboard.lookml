@@ -77,7 +77,7 @@
     x_axis_gridlines: false
     y_axis_gridlines: true
     show_view_names: false
-    legend_position: bottom
+    legend_position: right
     row: 7
     col: 12
     width: 12
@@ -202,6 +202,19 @@
     fields: [fact_daily_social.platform_name, fact_daily_social.total_video_views, fact_daily_social.total_ugc_creations]
     sorts: [fact_daily_social.total_video_views desc]
     show_view_names: false
+    y_axes:
+    - label: ''
+      orientation: bottom
+      series:
+      - id: fact_daily_social.total_video_views
+        name: Total Video Views
+        axisId: fact_daily_social.total_video_views
+    - label: ''
+      orientation: top
+      series:
+      - id: fact_daily_social.total_ugc_creations
+        name: Total UGC Creations
+        axisId: fact_daily_social.total_ugc_creations
     row: 34
     col: 0
     width: 12
@@ -215,6 +228,19 @@
     fields: [dim_artists.artist_name, fact_daily_social.total_video_views, fact_daily_social.viral_engagement_rate]
     sorts: [fact_daily_social.total_video_views desc]
     show_view_names: false
+    y_axes:
+    - label: ''
+      orientation: left
+      series:
+      - id: fact_daily_social.total_video_views
+        name: Total Video Views
+        axisId: fact_daily_social.total_video_views
+    - label: ''
+      orientation: right
+      series:
+      - id: fact_daily_social.viral_engagement_rate
+        name: Viral Engagement Rate
+        axisId: fact_daily_social.viral_engagement_rate
     row: 38
     col: 12
     width: 12
