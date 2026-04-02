@@ -26,7 +26,7 @@ view: fact_merch_orders {
     convert_tz: no
     datatype: date
     sql: ${TABLE}.order_date ;;
-    label: "Order Date"
+    label: "Order"
     description: "The date the merchandise order was placed by the fan."
     synonyms: ["purchase date", "sale date", "transaction date"]
   }

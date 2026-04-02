@@ -26,7 +26,7 @@ view: fact_daily_social {
     convert_tz: no
     datatype: date
     sql: ${TABLE}.date ;;
-    label: "Social Date"
+    label: "Social"
     description: "The specific date of the social media activity."
     synonyms: ["activity date", "engagement date", "day"]
   }

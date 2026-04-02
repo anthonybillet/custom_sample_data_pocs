@@ -38,7 +38,7 @@ view: dim_artists {
     convert_tz: no
     datatype: date
     sql: ${TABLE}.signing_date ;;
-    label: "Signing Date"
+    label: "Signing"
     description: "The date the artist was officially signed to the roster."
     synonyms: ["contract date", "joined date", "date signed"]
   }

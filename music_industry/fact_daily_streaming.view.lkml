@@ -26,7 +26,7 @@ view: fact_daily_streaming {
     convert_tz: no
     datatype: date
     sql: ${TABLE}.date ;;
-    label: "Streaming Date"
+    label: "Streaming"
     description: "The specific date the streaming activity occurred."
     synonyms: ["stream date", "play date", "day"]
   }

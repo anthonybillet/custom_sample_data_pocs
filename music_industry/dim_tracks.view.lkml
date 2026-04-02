@@ -50,7 +50,7 @@ view: dim_tracks {
     convert_tz: no
     datatype: date
     sql: ${TABLE}.release_date ;;
-    label: "Release Date"
+    label: "Release"
     description: "The date the track was officially released to the public."
     synonyms: ["launch date", "drop date", "publish date"]
   }
