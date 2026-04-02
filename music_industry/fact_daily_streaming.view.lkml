@@ -53,6 +53,21 @@ view: fact_daily_streaming {
     sql: ${TABLE}.source_system ;;
   }
 
+  # --- Mocked Dimensions for AI Guardrails Demo ---
+  dimension: is_bot_suspect {
+    type: string
+    sql: CASE WHEN MOD(ABS(CAST(FARM_FINGERPRINT(CAST(${streaming_id} AS STRING)) AS INT64)), 100) < 2 THEN 'Yes' ELSE 'No' END ;;
+    label: "Is Bot Suspect"
+    description: "Flags ~2% of streams as suspected bot farm activity."
+  }
+
+  dimension: listen_duration_seconds {
+    type: number
+    sql: MOD(ABS(CAST(FARM_FINGERPRINT(CAST(${streaming_id} AS STRING)) AS INT64)), 200) + 5 ;;
+    label: "Listen Duration (Seconds)"
+    description: "Duration of the stream in seconds."
+  }
+
   # --- Base Measures ---
   measure: total_streams {
     type: sum
@@ -102,11 +117,15 @@ view: fact_daily_streaming {
 
   # --- Complex Business Logic for Demo ---
   measure: completed_organic_streams {
-    type: number
-    sql: ${total_streams} - ${total_skips} ;;
+    type: sum
+    sql: ${TABLE}.total_streams - ${TABLE}.skips ;;
+    filters: [
+      is_bot_suspect: "No",
+      listen_duration_seconds: ">= 30"
+    ]
     value_format_name: decimal_0
     label: "Completed Organic Streams"
-    description: "Total streams minus skips. Standard for engaged, lean-forward listening."
+    description: "Total streams minus skips, excluding bots and streams under 30 seconds. Standard for engaged, lean-forward listening."
     synonyms: ["engaged streams", "non-skip plays", "active listens", "true plays"]
     drill_fields: [streaming_drill_details*]
   }
