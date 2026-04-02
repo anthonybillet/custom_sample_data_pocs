@@ -1,4 +1,4 @@
-- dashboard: label_executive_hub
+- dashboard: label_executive_hub_1
   title: "Label Executive Command Center"
   layout: newspaper
   preferred_viewer: dashboards-next
@@ -13,12 +13,12 @@
     title_text: ""
     body_text: |
       <div style="padding: 20px 10px; text-align: center; font-family: Arial, sans-serif;">
-        <h1 style="margin-bottom: 5px; color: #ffffff; font-weight: 600;">Label Command Center</h1>
-        <p style="color: #9aa0a6; font-size: 14px; margin-bottom: 20px;">AI-Grounded Analytics & Performance Metrics</p>
-        <div style="border-top: 1px solid #3c4043; border-bottom: 1px solid #3c4043; padding: 15px 0; font-size: 15px; font-weight: 500;">
-          <a href="#streaming" style="color: #8ab4f8; text-decoration: none; padding: 0 15px;">🎧 1. Streaming & Conversions</a> |
-          <a href="#social" style="color: #8ab4f8; text-decoration: none; padding: 0 15px;">📱 2. Social Virality</a> |
-          <a href="#d2c" style="color: #8ab4f8; text-decoration: none; padding: 0 15px;">🛒 3. D2C Merch</a>
+        <h1 style="margin-bottom: 5px; color: #202124; font-weight: 600;">Label Command Center</h1>
+        <p style="color: #5f6368; font-size: 14px; margin-bottom: 20px;">AI-Grounded Analytics & Performance Metrics</p>
+        <div style="border-top: 1px solid #dadce0; border-bottom: 1px solid #dadce0; padding: 15px 0; font-size: 15px; font-weight: 500;">
+          <a href="#streaming" style="color: #1a73e8; text-decoration: none; padding: 0 15px;">🎧 1. Streaming & Conversions</a> |
+          <a href="#social" style="color: #1a73e8; text-decoration: none; padding: 0 15px;">📱 2. Social Virality</a> |
+          <a href="#d2c" style="color: #1a73e8; text-decoration: none; padding: 0 15px;">🛒 3. D2C Merch</a>
         </div>
       </div>
     row: 0
@@ -33,9 +33,9 @@
     type: text
     title_text: ""
     body_text: |
-      <div id="streaming" style="background-color: #202124; padding: 20px; border-left: 6px solid #4285f4; border-radius: 4px; margin-top: 20px;">
-        <h2 style="margin: 0; color: #ffffff; font-family: Arial;">1. Streaming & Track Conversions</h2>
-        <p style="margin: 5px 0 0 0; color: #9aa0a6; font-family: Arial;">Core DSP performance, organic engagement, and LookML-governed conversion ratios.</p>
+      <div id="streaming" style="background-color: #f8f9fa; padding: 20px; border-left: 6px solid #4285f4; border-radius: 4px; margin-top: 20px;">
+        <h2 style="margin: 0; color: #202124; font-family: Arial;">1. Streaming & Track Conversions</h2>
+        <p style="margin: 5px 0 0 0; color: #5f6368; font-family: Arial;">Core DSP performance, organic engagement, and LookML-governed conversion ratios.</p>
       </div>
     row: 4
     col: 0
@@ -135,7 +135,6 @@
     sorts: [fact_daily_streaming.completed_organic_streams desc]
     limit: 15
     show_view_names: false
-    table_theme: transparent
     row: 23
     col: 12
     width: 12
@@ -148,9 +147,9 @@
     type: text
     title_text: ""
     body_text: |
-      <div id="social" style="background-color: #202124; padding: 20px; border-left: 6px solid #e94235; border-radius: 4px; margin-top: 40px;">
-        <h2 style="margin: 0; color: #ffffff; font-family: Arial;">2. Social Virality & Marketing Engine</h2>
-        <p style="margin: 5px 0 0 0; color: #9aa0a6; font-family: Arial;">UGC creation velocity, cross-platform virality, and short-form video engagement.</p>
+      <div id="social" style="background-color: #f8f9fa; padding: 20px; border-left: 6px solid #e94235; border-radius: 4px; margin-top: 40px;">
+        <h2 style="margin: 0; color: #202124; font-family: Arial;">2. Social Virality & Marketing Engine</h2>
+        <p style="margin: 5px 0 0 0; color: #5f6368; font-family: Arial;">UGC creation velocity, cross-platform virality, and short-form video engagement.</p>
       </div>
     row: 27
     col: 0
@@ -270,7 +269,6 @@
     sorts: [fact_daily_social.total_video_views desc]
     limit: 10
     show_view_names: false
-    table_theme: transparent
     row: 46
     col: 12
     width: 12
@@ -283,9 +281,9 @@
     type: text
     title_text: ""
     body_text: |
-      <div id="d2c" style="background-color: #202124; padding: 20px; border-left: 6px solid #fbbc04; border-radius: 4px; margin-top: 40px;">
-        <h2 style="margin: 0; color: #ffffff; font-family: Arial;">3. D2C Merch & Superfan Economics</h2>
-        <p style="margin: 5px 0 0 0; color: #9aa0a6; font-family: Arial;">High-margin revenue mapping, ARPU insights, and fan acquisition performance.</p>
+      <div id="d2c" style="background-color: #f8f9fa; padding: 20px; border-left: 6px solid #fbbc04; border-radius: 4px; margin-top: 40px;">
+        <h2 style="margin: 0; color: #202124; font-family: Arial;">3. D2C Merch & Superfan Economics</h2>
+        <p style="margin: 5px 0 0 0; color: #5f6368; font-family: Arial;">High-margin revenue mapping, ARPU insights, and fan acquisition performance.</p>
       </div>
     row: 50
     col: 0
@@ -378,7 +376,6 @@
     sorts: [fact_merch_orders.total_gross_revenue desc]
     limit: 10
     show_view_names: false
-    table_theme: transparent
     row: 67
     col: 12
     width: 12
