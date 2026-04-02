@@ -11,18 +11,25 @@ view: dim_artists {
   dimension: artist_name {
     type: string
     sql: ${TABLE}.artist_name ;;
-    description: "The official stage name of the Interscope roster artist."
+    label: "Artist Name"
+    description: "The official stage name of the roster artist."
+    synonyms: ["musician", "band", "performer", "singer"]
   }
 
   dimension: genre {
     type: string
     sql: ${TABLE}.genre ;;
+    label: "Genre"
+    description: "The musical category or style of the artist."
+    synonyms: ["musical style", "category", "music type"]
   }
 
   dimension: roster_tier {
     type: string
     sql: ${TABLE}.roster_tier ;;
+    label: "Roster Tier"
     description: "Categorization of the artist's career stage (e.g., Developing, Mainstream, Legacy)."
+    synonyms: ["career stage", "artist level", "status", "tier"]
   }
 
   dimension_group: signing {
@@ -31,6 +38,9 @@ view: dim_artists {
     convert_tz: no
     datatype: date
     sql: ${TABLE}.signing_date ;;
+    label: "Signing Date"
+    description: "The date the artist was officially signed to the roster."
+    synonyms: ["contract date", "joined date", "date signed"]
   }
 
   # --- Hidden ETL Fields ---
@@ -50,6 +60,8 @@ view: dim_artists {
   measure: count_artists {
     type: count
     drill_fields: [artist_name, genre, roster_tier, dim_tracks.count_tracks]
+    label: "Artist Count"
     description: "Total count of individual artists on the roster."
+    synonyms: ["number of artists", "total musicians", "roster size"]
   }
 }

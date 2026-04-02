@@ -26,12 +26,17 @@ view: fact_daily_social {
     convert_tz: no
     datatype: date
     sql: ${TABLE}.date ;;
+    label: "Social Date"
+    description: "The specific date of the social media activity."
+    synonyms: ["activity date", "engagement date", "day"]
   }
 
   dimension: platform_name {
     type: string
     sql: ${TABLE}.platform_name ;;
+    label: "Social Platform Name"
     description: "Social media platform (e.g., TikTok, Instagram Reels, YouTube Shorts)."
+    synonyms: ["app", "social network", "media channel"]
   }
 
   # --- Hidden ETL Fields ---
@@ -53,7 +58,9 @@ view: fact_daily_social {
     type: sum
     sql: ${TABLE}.video_views ;;
     value_format_name: decimal_0
+    label: "Total Video Views"
     description: "Total impressions/views of videos featuring the track audio."
+    synonyms: ["impressions", "plays", "video watches", "tiktok views"]
     drill_fields: [social_drill_details*]
   }
 
@@ -61,7 +68,9 @@ view: fact_daily_social {
     type: sum
     sql: ${TABLE}.ugc_creations ;;
     value_format_name: decimal_0
+    label: "Total UGC Creations"
     description: "Count of User Generated Content videos created using the track audio (highly correlated to virality)."
+    synonyms: ["user videos", "creations", "posts", "tiktok creations"]
     drill_fields: [social_drill_details*]
   }
 
@@ -69,6 +78,9 @@ view: fact_daily_social {
     type: sum
     sql: ${TABLE}.shares ;;
     value_format_name: decimal_0
+    label: "Total Shares"
+    description: "The number of times content featuring the track was shared by users."
+    synonyms: ["forwards", "retweets", "sends"]
     drill_fields: [social_drill_details*]
   }
 
@@ -76,7 +88,9 @@ view: fact_daily_social {
     type: number
     sql: 1.0 * (${total_shares} + ${total_ugc_creations}) / NULLIF(${total_video_views}, 0) ;;
     value_format_name: percent_2
-    description: "Measures virality depth: (Shares + UGC Creations) divided by Total Views. Standard Interscope viral metric."
+    label: "Viral Engagement Rate"
+    description: "Measures virality depth: (Shares + UGC Creations) divided by Total Views. Standard viral metric."
+    synonyms: ["virality score", "engagement percentage", "share rate"]
     drill_fields: [social_drill_details*]
   }
 

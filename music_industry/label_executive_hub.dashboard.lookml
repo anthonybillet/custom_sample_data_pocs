@@ -4,6 +4,54 @@
   preferred_viewer: dashboards-next
   description: "Executive Hub for Label Operations, Marketing, and Finance."
 
+  filters:
+  - name: Date Range
+    title: Date Range
+    type: date_filter
+    default_value: 30 days
+    allow_multiple_values: true
+    required: false
+  - name: Artist Name
+    title: Artist Name
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    model: music_industry
+    explore: fact_daily_streaming
+    listens_to_filters: []
+    field: dim_artists.artist_name
+  - name: Roster Tier
+    title: Roster Tier
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    model: music_industry
+    explore: fact_daily_streaming
+    listens_to_filters: []
+    field: dim_artists.roster_tier
+  - name: Genre
+    title: Genre
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    model: music_industry
+    explore: fact_daily_streaming
+    listens_to_filters: []
+    field: dim_artists.genre
+  - name: Platform
+    title: Platform
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    model: music_industry
+    explore: fact_daily_streaming
+    listens_to_filters: []
+    field: fact_daily_streaming.platform_name
+
   elements:
   # ==============================================================================
   # HEADER & NAVIGATION MENU
@@ -49,6 +97,12 @@
     type: single_value
     fields: [fact_daily_streaming.completed_organic_streams]
     show_single_value_title: true
+    listen:
+      Date Range: fact_daily_streaming.date_date
+      Artist Name: dim_artists.artist_name
+      Roster Tier: dim_artists.roster_tier
+      Genre: dim_artists.genre
+      Platform: fact_daily_streaming.platform_name
     row: 7
     col: 0
     width: 6
@@ -61,6 +115,12 @@
     type: single_value
     fields: [fact_daily_streaming.true_stream_to_save_ratio]
     show_single_value_title: true
+    listen:
+      Date Range: fact_daily_streaming.date_date
+      Artist Name: dim_artists.artist_name
+      Roster Tier: dim_artists.roster_tier
+      Genre: dim_artists.genre
+      Platform: fact_daily_streaming.platform_name
     row: 7
     col: 6
     width: 6
@@ -78,6 +138,12 @@
     y_axis_gridlines: true
     show_view_names: false
     legend_position: right
+    listen:
+      Date Range: fact_daily_streaming.date_date
+      Artist Name: dim_artists.artist_name
+      Roster Tier: dim_artists.roster_tier
+      Genre: dim_artists.genre
+      Platform: fact_daily_streaming.platform_name
     row: 7
     col: 12
     width: 12
@@ -93,6 +159,12 @@
     limit: 10
     show_view_names: false
     show_value_labels: true
+    listen:
+      Date Range: fact_daily_streaming.date_date
+      Artist Name: dim_artists.artist_name
+      Roster Tier: dim_artists.roster_tier
+      Genre: dim_artists.genre
+      Platform: fact_daily_streaming.platform_name
     row: 11
     col: 0
     width: 12
@@ -107,6 +179,12 @@
     sorts: [fact_daily_streaming.total_streams desc]
     inner_radius: 50
     show_view_names: false
+    listen:
+      Date Range: fact_daily_streaming.date_date
+      Artist Name: dim_artists.artist_name
+      Roster Tier: dim_artists.roster_tier
+      Genre: dim_artists.genre
+      Platform: fact_daily_streaming.platform_name
     row: 15
     col: 12
     width: 12
@@ -121,6 +199,12 @@
     sorts: [fact_daily_streaming.total_saves desc]
     show_view_names: false
     show_value_labels: true
+    listen:
+      Date Range: fact_daily_streaming.date_date
+      Artist Name: dim_artists.artist_name
+      Roster Tier: dim_artists.roster_tier
+      Genre: dim_artists.genre
+      Platform: fact_daily_streaming.platform_name
     row: 19
     col: 0
     width: 12
@@ -136,6 +220,12 @@
     limit: 15
     show_view_names: false
     table_theme: transparent
+    listen:
+      Date Range: fact_daily_streaming.date_date
+      Artist Name: dim_artists.artist_name
+      Roster Tier: dim_artists.roster_tier
+      Genre: dim_artists.genre
+      Platform: fact_daily_streaming.platform_name
     row: 23
     col: 12
     width: 12
@@ -164,6 +254,12 @@
     type: single_value
     fields: [fact_daily_social.total_ugc_creations]
     show_single_value_title: true
+    listen:
+      Date Range: fact_daily_social.date_date
+      Artist Name: dim_artists.artist_name
+      Roster Tier: dim_artists.roster_tier
+      Genre: dim_artists.genre
+      Platform: fact_daily_social.platform_name
     row: 30
     col: 0
     width: 6
@@ -176,6 +272,12 @@
     type: single_value
     fields: [fact_daily_social.viral_engagement_rate]
     show_single_value_title: true
+    listen:
+      Date Range: fact_daily_social.date_date
+      Artist Name: dim_artists.artist_name
+      Roster Tier: dim_artists.roster_tier
+      Genre: dim_artists.genre
+      Platform: fact_daily_social.platform_name
     row: 30
     col: 6
     width: 6
@@ -190,6 +292,12 @@
     sorts: [fact_daily_social.date_date desc]
     limit: 30
     show_view_names: false
+    listen:
+      Date Range: fact_daily_social.date_date
+      Artist Name: dim_artists.artist_name
+      Roster Tier: dim_artists.roster_tier
+      Genre: dim_artists.genre
+      Platform: fact_daily_social.platform_name
     row: 30
     col: 12
     width: 12
@@ -216,6 +324,12 @@
       - id: fact_daily_social.total_ugc_creations
         name: Total UGC Creations
         axisId: fact_daily_social.total_ugc_creations
+    listen:
+      Date Range: fact_daily_social.date_date
+      Artist Name: dim_artists.artist_name
+      Roster Tier: dim_artists.roster_tier
+      Genre: dim_artists.genre
+      Platform: fact_daily_social.platform_name
     row: 34
     col: 0
     width: 12
@@ -242,6 +356,12 @@
       - id: fact_daily_social.viral_engagement_rate
         name: Viral Engagement Rate
         axisId: fact_daily_social.viral_engagement_rate
+    listen:
+      Date Range: fact_daily_social.date_date
+      Artist Name: dim_artists.artist_name
+      Roster Tier: dim_artists.roster_tier
+      Genre: dim_artists.genre
+      Platform: fact_daily_social.platform_name
     row: 38
     col: 12
     width: 12
@@ -256,6 +376,12 @@
     sorts: [fact_daily_social.total_shares desc]
     show_view_names: false
     show_value_labels: true
+    listen:
+      Date Range: fact_daily_social.date_date
+      Artist Name: dim_artists.artist_name
+      Roster Tier: dim_artists.roster_tier
+      Genre: dim_artists.genre
+      Platform: fact_daily_social.platform_name
     row: 42
     col: 0
     width: 12
@@ -271,6 +397,12 @@
     limit: 10
     show_view_names: false
     table_theme: transparent
+    listen:
+      Date Range: fact_daily_social.date_date
+      Artist Name: dim_artists.artist_name
+      Roster Tier: dim_artists.roster_tier
+      Genre: dim_artists.genre
+      Platform: fact_daily_social.platform_name
     row: 46
     col: 12
     width: 12
@@ -299,6 +431,11 @@
     type: single_value
     fields: [fact_merch_orders.total_gross_revenue]
     show_single_value_title: true
+    listen:
+      Date Range: fact_merch_orders.order_date
+      Artist Name: dim_artists.artist_name
+      Roster Tier: dim_artists.roster_tier
+      Genre: dim_artists.genre
     row: 53
     col: 0
     width: 8
@@ -311,6 +448,11 @@
     type: single_value
     fields: [fact_merch_orders.average_revenue_per_fan]
     show_single_value_title: true
+    listen:
+      Date Range: fact_merch_orders.order_date
+      Artist Name: dim_artists.artist_name
+      Roster Tier: dim_artists.roster_tier
+      Genre: dim_artists.genre
     row: 53
     col: 8
     width: 8
@@ -323,6 +465,11 @@
     type: single_value
     fields: [fact_merch_orders.gross_margin_percentage]
     show_single_value_title: true
+    listen:
+      Date Range: fact_merch_orders.order_date
+      Artist Name: dim_artists.artist_name
+      Roster Tier: dim_artists.roster_tier
+      Genre: dim_artists.genre
     row: 53
     col: 16
     width: 8
@@ -337,6 +484,11 @@
     map_projection: ''
     quantize_colors: false
     show_view_names: false
+    listen:
+      Date Range: fact_merch_orders.order_date
+      Artist Name: dim_artists.artist_name
+      Roster Tier: dim_artists.roster_tier
+      Genre: dim_artists.genre
     row: 57
     col: 0
     width: 12
@@ -350,6 +502,11 @@
     fields: [fact_merch_orders.item_category, fact_merch_orders.total_gross_revenue]
     sorts: [fact_merch_orders.total_gross_revenue desc]
     show_view_names: false
+    listen:
+      Date Range: fact_merch_orders.order_date
+      Artist Name: dim_artists.artist_name
+      Roster Tier: dim_artists.roster_tier
+      Genre: dim_artists.genre
     row: 57
     col: 12
     width: 12
@@ -364,6 +521,11 @@
     sorts: [dim_fans.age_tier]
     show_view_names: false
     show_value_labels: true
+    listen:
+      Date Range: fact_merch_orders.order_date
+      Artist Name: dim_artists.artist_name
+      Roster Tier: dim_artists.roster_tier
+      Genre: dim_artists.genre
     row: 67
     col: 0
     width: 12
@@ -379,6 +541,11 @@
     limit: 10
     show_view_names: false
     table_theme: transparent
+    listen:
+      Date Range: fact_merch_orders.order_date
+      Artist Name: dim_artists.artist_name
+      Roster Tier: dim_artists.roster_tier
+      Genre: dim_artists.genre
     row: 67
     col: 12
     width: 12
