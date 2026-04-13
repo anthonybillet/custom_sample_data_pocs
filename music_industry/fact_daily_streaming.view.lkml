@@ -120,7 +120,7 @@ view: fact_daily_streaming {
     type: sum
     sql: ${TABLE}.total_streams - ${TABLE}.skips ;;
     filters: [
-      is_bot_suspect: "No",
+      is_bot_suspect: "Yes",
       listen_duration_seconds: ">= 30"
     ]
     value_format_name: decimal_0
