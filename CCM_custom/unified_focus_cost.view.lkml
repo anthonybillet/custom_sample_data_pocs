@@ -46,7 +46,7 @@ view: unified_focus_cost {
     UsageUnit AS ConsumedUnit
     FROM ${oci_billing_export.SQL_TABLE_NAME}
     ;;
-    persist_for: "24 hours"
+    datagroup_trigger: midnight_et_refresh
   }
   #   sql:
   #     SELECT
