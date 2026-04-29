@@ -1,6 +1,7 @@
 connection: "argolis"
 
 include: "/streaming_platform/*.view.lkml"
+include: "/streaming_platform/*.dashboard.lookml"
 
 explore: sessions {
   join: users {
