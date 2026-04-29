@@ -8,10 +8,17 @@
   # ─── HEADER & OPPORTUNITIES ─────────────────────────────────────────────
   - name: report_header
     type: text
-    title_text: "Demo_creator | THE HIDDEN GEM"
-    subtitle_text: "Jan 1, 2026 - Mar 31, 2026"
     body_text: |-
-      *This analysis was developed exclusively for Demo_creator as part of Chaturbate's Creator Insights program. The data and recommendations that follow are intended as a resource, one perspective on your already-growing broadcast.*
+      <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; margin:12px 0 4px 0;">
+          <div style="display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
+              <span style="font-size:32px; font-weight:700; color:#111;">Demo_creator</span>
+              <span style="display:inline-block; background:#1abc9c; color:#fff; font-size:11px; font-weight:600; border-radius:4px; padding:5px 12px; letter-spacing:0.4px; white-space:nowrap; text-align:center; line-height:1;">THE HIDDEN GEM</span>
+          </div>
+          <div style="font-size:14px; color:#888; margin-top:4px;">Jan 1, 2026 – Mar 31, 2026</div>
+          <div style="font-size:13px; color:#777; font-style:italic; margin-top:8px; line-height:1.5;">
+              This analysis was developed exclusively for Demo_creator as part of Chaturbate's Creator Insights program. The data and recommendations that follow are intended as a resource, one perspective on your already-growing broadcast.
+          </div>
+      </div>
     row: 0
     col: 0
     width: 24
@@ -65,12 +72,16 @@
 
   - name: opportunities_text
     type: text
-    title_text: "### Opportunities"
     body_text: |-
-      🟢 **Tags:** If it applies, adding 'flexible' could work well here - your audience loves it.
-      🟢 **Audience:** Only 1.2% of your viewers tipped - tip goals may help convert more.
-      🟢 **Schedule:** Your tippers are active Mon-Thu but you're not broadcasting then.
-      🟡 **Menu:** 'flash smile' gets 44% of all tips - a higher-priced version could earn more.
+      <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
+          <div style="font-size:22px; font-weight:600; color:#111; margin-bottom:12px; border-bottom:1px solid #ccc; padding-bottom:4px;">Opportunities</div>
+          <div style="font-size:14px; color:#333; line-height:1.6;">
+              <p style="margin:6px 0;"><span style="color:#2ecc71; font-size:16px;">●</span> <strong>Tags:</strong> If it applies, adding 'flexible' could work well here - your audience loves it.</p>
+              <p style="margin:6px 0;"><span style="color:#2ecc71; font-size:16px;">●</span> <strong>Audience:</strong> Only 1.2% of your viewers tipped - tip goals may help convert more.</p>
+              <p style="margin:6px 0;"><span style="color:#2ecc71; font-size:16px;">●</span> <strong>Schedule:</strong> Your tippers are active Mon-Thu but you're not broadcasting then.</p>
+              <p style="margin:6px 0;"><span style="color:#f39c12; font-size:16px;">●</span> <strong>Menu:</strong> 'flash smile' gets 44% of all tips - a higher-priced version could earn more.</p>
+          </div>
+      </div>
     row: 7
     col: 0
     width: 24
@@ -80,8 +91,14 @@
   # ─── AUDIENCE INSIGHTS ──────────────────────────────────────────────────
   - name: section_audience
     type: text
-    title_text: "## Audience Insights"
-    subtitle_text: "How viewers find you and how long they stay"
+    body_text: |-
+      <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
+          <div style="display:flex; align-items:center; gap:8px; font-size:24px; font-weight:600; color:#111; padding:4px 0;">
+            Audience Insights
+            <span style="flex:1; height:1px; background:#ccc; margin-left:8px;"></span>
+          </div>
+          <div style="font-size:14px; color:#888; font-style:italic; padding:2px 0 8px;">How viewers find you and how long they stay</div>
+      </div>
     row: 12
     col: 0
     width: 24
@@ -158,8 +175,14 @@
   # ─── TAG INSIGHTS ───────────────────────────────────────────────────────
   - name: section_tags
     type: text
-    title_text: "## Tag Insights"
-    subtitle_text: "Hashtag performance and audience compatibility analysis"
+    body_text: |-
+      <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
+          <div style="display:flex; align-items:center; gap:8px; font-size:24px; font-weight:600; color:#111; padding:4px 0;">
+            Tag Insights
+            <span style="flex:1; height:1px; background:#ccc; margin-left:8px;"></span>
+          </div>
+          <div style="font-size:14px; color:#888; font-style:italic; padding:2px 0 8px;">Hashtag performance and audience compatibility analysis</div>
+      </div>
     row: 28
     col: 0
     width: 24
@@ -206,8 +229,14 @@
   # ─── TIP MENU INSIGHTS ──────────────────────────────────────────────────
   - name: section_menu
     type: text
-    title_text: "## Tip Menu Insights"
-    subtitle_text: "Menu performance, pricing insights, and what your audience responds to"
+    body_text: |-
+      <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
+          <div style="display:flex; align-items:center; gap:8px; font-size:24px; font-weight:600; color:#111; padding:4px 0;">
+            Tip Menu Insights
+            <span style="flex:1; height:1px; background:#ccc; margin-left:8px;"></span>
+          </div>
+          <div style="font-size:14px; color:#888; font-style:italic; padding:2px 0 8px;">Menu performance, pricing insights, and what your audience responds to</div>
+      </div>
     row: 37
     col: 0
     width: 24
@@ -224,8 +253,13 @@
     limit: 10
     show_view_names: false
     show_row_numbers: false
-    enable_conditional_formatting: true
-    conditional_formatting: [{"type": "data_bar", "value_format": null, "background_color": "#e67e22", "color_application": {"collection_id": "b43731d5-dc87-4a8e-b807-635bef3948e7", "palette_id": "1e4d66b9-f066-4c33-b0b7-cc10b4810688"}, "bold": false, "italic": false, "strikethrough": false, "fields": ["tips.total_tokens"]}]
+    enable_conditional_formatting: false
+    series_cell_visualizations:
+      tips.total_tokens:
+        is_active: true
+        palette:
+          palette_id: 1e4d66b9-f066-4c33-b0b7-cc10b4810688
+          collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7
     row: 39
     col: 0
     width: 12
@@ -251,8 +285,14 @@
   # ─── SCHEDULE INSIGHTS ──────────────────────────────────────────────────
   - name: section_schedule
     type: text
-    title_text: "## Schedule Insights"
-    subtitle_text: "Broadcast timing, audience activity, and scheduling opportunities"
+    body_text: |-
+      <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
+          <div style="display:flex; align-items:center; gap:8px; font-size:24px; font-weight:600; color:#111; padding:4px 0;">
+            Schedule Insights
+            <span style="flex:1; height:1px; background:#ccc; margin-left:8px;"></span>
+          </div>
+          <div style="font-size:14px; color:#888; font-style:italic; padding:2px 0 8px;">Broadcast timing, audience activity, and scheduling opportunities</div>
+      </div>
     row: 47
     col: 0
     width: 24
@@ -270,7 +310,7 @@
     show_row_numbers: false
     truncate_column_names: false
     enable_conditional_formatting: true
-    conditional_formatting: [{"type": "background color", "value_format": null, "background_color": "#1f3e5a", "color_application": {"collection_id": "b43731d5-dc87-4a8e-b807-635bef3948e7", "palette_id": "1e4d66b9-f066-4c33-b0b7-cc10b4810688", "options": {"steps": 5, "reverse": false, "stepped": false}}, "bold": false, "italic": false, "strikethrough": false, "fields": ["tips.count_tips"]}]
+    conditional_formatting: [{"type": "along a scale", "value_format": null, "background_color": "#1f3e5a", "color_application": {"collection_id": "b43731d5-dc87-4a8e-b807-635bef3948e7", "palette_id": "1e4d66b9-f066-4c33-b0b7-cc10b4810688", "options": {"steps": 5, "reverse": false, "stepped": false}}, "bold": false, "italic": false, "strikethrough": false, "fields": ["tips.count_tips"]}]
     row: 49
     col: 0
     width: 24
