@@ -5,7 +5,7 @@
   description: "A replica of the Creator Insights PDF dashboard built on the granular data model."
 
   elements:
-  # ─── HEADER & OPPORTUNITIES ─────────────────────────────────────────────
+  # ─── HEADER ─────────────────────────────────────────────────────────────
   - name: report_header
     type: text
     body_text: |-
@@ -24,6 +24,7 @@
     width: 24
     height: 3
 
+  # ─── KPIS ───────────────────────────────────────────────────────────────
   - name: kpi_1_viewers
     title: "Unique Logged-In Viewers"
     type: single_value
@@ -70,6 +71,23 @@
     width: 6
     height: 4
 
+  # ─── ARCHETYPE & OPPORTUNITIES ──────────────────────────────────────────
+  - name: archetype_card
+    type: text
+    body_text: |-
+      <div style="background:#f9f9f9; border-radius:10px; padding:24px 28px; border-left:4px solid #1abc9c; margin:0; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; height: 100%;">
+          <div style="font-size:18px; font-weight:700; color:#222; margin-bottom:10px;">
+              Viewers who find you stay and spend big.
+          </div>
+          <div style="font-size:14px; color:#444; line-height:1.6;">
+              The audience that finds this room stays longer and spends more than almost any comparable creator. New viewer discovery hasn't caught up to how well this room converts - expanding tags and maintaining a consistent schedule can close that gap.
+          </div>
+      </div>
+    row: 7
+    col: 0
+    width: 24
+    height: 3
+
   - name: opportunities_text
     type: text
     body_text: |-
@@ -82,11 +100,10 @@
               <p style="margin:6px 0;"><span style="color:#f39c12; font-size:16px;">●</span> <strong>Menu:</strong> 'flash smile' gets 44% of all tips - a higher-priced version could earn more.</p>
           </div>
       </div>
-    row: 7
+    row: 10
     col: 0
     width: 24
     height: 5
-
 
   # ─── AUDIENCE INSIGHTS ──────────────────────────────────────────────────
   - name: section_audience
@@ -99,7 +116,7 @@
           </div>
           <div style="font-size:14px; color:#888; font-style:italic; padding:2px 0 8px;">How viewers find you and how long they stay</div>
       </div>
-    row: 12
+    row: 15
     col: 0
     width: 24
     height: 2
@@ -126,7 +143,7 @@
       sessions.count_unique_viewers: "#F0A830"
     show_value_labels: true
     font_size: 10
-    row: 14
+    row: 17
     col: 0
     width: 12
     height: 8
@@ -143,7 +160,7 @@
     smoothedBars: false
     isStepped: false
     labelScale: 1
-    row: 14
+    row: 17
     col: 12
     width: 12
     height: 8
@@ -166,11 +183,10 @@
       Recommendations: "#5BC0DE"
       Direct: "#F0A830"
       Other: "#BBBBBB"
-    row: 22
+    row: 25
     col: 0
     width: 24
     height: 6
-
 
   # ─── TAG INSIGHTS ───────────────────────────────────────────────────────
   - name: section_tags
@@ -183,14 +199,14 @@
           </div>
           <div style="font-size:14px; color:#888; font-style:italic; padding:2px 0 8px;">Hashtag performance and audience compatibility analysis</div>
       </div>
-    row: 28
+    row: 31
     col: 0
     width: 24
     height: 2
 
   - name: hashtag_performance
     title: "Your Hashtag Performance"
-    type: table
+    type: looker_grid
     model: streaming_platform
     explore: sessions
     dimensions: [sessions.entry_hashtag]
@@ -201,7 +217,7 @@
     show_row_numbers: false
     truncate_column_names: false
     subtotals_at_bottom: false
-    row: 30
+    row: 33
     col: 0
     width: 12
     height: 7
@@ -220,11 +236,10 @@
     show_x_axis_label: true
     series_colors:
       sessions.count_unique_viewers: "#00b4d8"
-    row: 30
+    row: 33
     col: 12
     width: 12
     height: 7
-
 
   # ─── TIP MENU INSIGHTS ──────────────────────────────────────────────────
   - name: section_menu
@@ -237,14 +252,14 @@
           </div>
           <div style="font-size:14px; color:#888; font-style:italic; padding:2px 0 8px;">Menu performance, pricing insights, and what your audience responds to</div>
       </div>
-    row: 37
+    row: 40
     col: 0
     width: 24
     height: 2
 
   - name: what_tippers_buy
     title: "What Your Tippers Buy From You"
-    type: table
+    type: looker_grid
     model: streaming_platform
     explore: sessions
     dimensions: [tips.menu_item]
@@ -260,14 +275,14 @@
         palette:
           palette_id: 1e4d66b9-f066-4c33-b0b7-cc10b4810688
           collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7
-    row: 39
+    row: 42
     col: 0
     width: 12
     height: 8
 
   - name: what_tippers_buy_elsewhere
     title: "What Your Tippers Buy Elsewhere (Local Proxy)"
-    type: table
+    type: looker_grid
     model: streaming_platform
     explore: sessions
     dimensions: [tips.menu_item]
@@ -276,11 +291,10 @@
     limit: 10
     show_view_names: false
     show_row_numbers: false
-    row: 39
+    row: 42
     col: 12
     width: 12
     height: 8
-
 
   # ─── SCHEDULE INSIGHTS ──────────────────────────────────────────────────
   - name: section_schedule
@@ -293,14 +307,14 @@
           </div>
           <div style="font-size:14px; color:#888; font-style:italic; padding:2px 0 8px;">Broadcast timing, audience activity, and scheduling opportunities</div>
       </div>
-    row: 47
+    row: 50
     col: 0
     width: 24
     height: 2
 
   - name: when_fans_tip_heatmap
     title: "When Your Fans Tip You (Heatmap)"
-    type: table
+    type: looker_grid
     model: streaming_platform
     explore: sessions
     dimensions: [tips.tip_day_of_week]
@@ -310,8 +324,19 @@
     show_row_numbers: false
     truncate_column_names: false
     enable_conditional_formatting: true
-    conditional_formatting: [{"type": "along a scale", "value_format": null, "background_color": "#1f3e5a", "color_application": {"collection_id": "b43731d5-dc87-4a8e-b807-635bef3948e7", "palette_id": "1e4d66b9-f066-4c33-b0b7-cc10b4810688", "options": {"steps": 5, "reverse": false, "stepped": false}}, "bold": false, "italic": false, "strikethrough": false, "fields": ["tips.count_tips"]}]
-    row: 49
+    conditional_formatting:
+      - type: along a scale
+        value_format: null
+        background_color: "#1f3e5a"
+        font_color: null
+        color_application:
+          collection_id: legacy
+          palette_id: legacy_sequential1
+        bold: false
+        italic: false
+        strikethrough: false
+        fields: []
+    row: 52
     col: 0
     width: 24
     height: 9
