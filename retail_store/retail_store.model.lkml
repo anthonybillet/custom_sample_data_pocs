@@ -1,6 +1,7 @@
 connection: "argolis"
 
 include: "/retail_store/*.view.lkml"
+include: "/retail_store/**.dashboard.lookml"
 
 explore: fact_sales {
   label: "Retail Sales Analysis"
