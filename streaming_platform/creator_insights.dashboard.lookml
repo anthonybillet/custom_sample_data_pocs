@@ -313,25 +313,39 @@
     width: 12
     height: 7
     tab_name: ''
-  - title: Untapped Opportunities (Scatter Proxy)
-    name: Untapped Opportunities (Scatter Proxy)
-    model: streaming_platform
-    explore: sessions
+  - name: untapped_opportunities
+    title: "Untapped Opportunities"
     type: looker_scatter
-    fields: [sessions.entry_hashtag, sessions.count_unique_viewers, sessions.average_viewers_per_day]
+    model: streaming_platform
+    explore: hashtag_affinity
+    dimensions: [hashtag_affinity.exploring_hashtag, hashtag_affinity.usage_status]
+    measures: [hashtag_affinity.total_population_reach, hashtag_affinity.average_affinity, hashtag_affinity.total_audience_reach]
     show_view_names: false
     x_axis_gridlines: true
     y_axis_gridlines: true
     show_y_axis_labels: true
     show_x_axis_label: true
+    x_axis_label: "Potential Reach"
+    y_axis_label: "Audience Compatibility"
+    size_by_field: hashtag_affinity.total_audience_reach
+    color_application:
+      collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7
+      custom_color:
+        id: 3c6b24cb-626a-493a-a178-5e201b16c87e
+        label: Custom Color
+        type: continuous
+        stops:
+        - color: "#e67e22"
+          offset: 0
+        - color: "#1abc9c"
+          offset: 100
     series_colors:
-      sessions.count_unique_viewers: "#00b4d8"
-    listen: {}
-    row: 32
+      "Currently used": "#1abc9c"
+      "Not yet used": "#e67e22"
+    row: 33
     col: 12
     width: 12
     height: 7
-    tab_name: ''
   - name: " (6)"
     type: text
     body_text: |-
@@ -370,22 +384,21 @@
     width: 12
     height: 8
     tab_name: ''
-  - title: What Your Tippers Buy Elsewhere (Local Proxy)
-    name: What Your Tippers Buy Elsewhere (Local Proxy)
-    model: streaming_platform
-    explore: sessions
+  - name: what_tippers_buy_elsewhere
+    title: "What Your Tippers Buy Elsewhere"
     type: looker_grid
-    fields: [tips.menu_item, tips.median_price, tips.funnel_4_tipped]
-    sorts: [tips.funnel_4_tipped desc]
+    model: streaming_platform
+    explore: global_menu_performance
+    dimensions: [global_menu_performance.menu_item]
+    measures: [global_menu_performance.global_median_price, global_menu_performance.your_tippers_count]
+    sorts: [global_menu_performance.your_tippers_count desc]
     limit: 10
     show_view_names: false
     show_row_numbers: false
-    listen: {}
-    row: 41
+    row: 42
     col: 12
     width: 12
     height: 8
-    tab_name: ''
   - name: " (7)"
     type: text
     body_text: |-

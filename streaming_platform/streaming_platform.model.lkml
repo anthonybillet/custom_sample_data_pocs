@@ -22,3 +22,13 @@ explore: sessions {
     relationship: one_to_many
   }
 }
+
+explore: hashtag_affinity {
+  label: "Benchmark: Hashtag Affinity"
+  description: "Platform-wide hashtag benchmarks compared to local audience."
+}
+
+explore: global_menu_performance {
+  label: "Benchmark: Global Menu Performance"
+  description: "Platform-wide tip menu benchmarks compared to local tippers."
+}
