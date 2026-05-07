@@ -1,5 +1,5 @@
 view: sessions {
-  sql_table_name: `ant-billet-looker-core-argolis.streaming_platform.sessions` ;;
+  sql_table_name: `ant-billet-looker-core-argolis.streaming_platform.sessions_2` ;;
   drill_fields: [session_id, users.user_id, duration_seconds, traffic_source]
 
   dimension: session_id {
@@ -12,6 +12,12 @@ view: sessions {
     type: number
     hidden: yes
     sql: ${TABLE}.user_id ;;
+  }
+
+  dimension: creator_id {
+    type: number
+    hidden: yes
+    sql: ${TABLE}.creator_id ;;
   }
 
   dimension: broadcast_id {
@@ -100,5 +106,24 @@ view: sessions {
     type: number
     sql: 1.0 * ${count_unique_viewers} / NULLIF(${count_days_active}, 0) ;;
     value_format_name: decimal_1
+  }
+
+  measure: count_left_early {
+    type: count_distinct
+    sql: ${user_id} ;;
+    filters: [duration_seconds: "<=60"]
+  }
+
+  measure: count_watched_only {
+    type: count_distinct
+    sql: ${user_id} ;;
+    filters: [duration_seconds: ">60", interacted_in_chat: "no"]
+  }
+
+  measure: count_interacted_only {
+    type: count_distinct
+    sql: ${user_id} ;;
+    # Note: In a full setup, you'd filter out users who tipped.
+    filters: [interacted_in_chat: "yes"]
   }
 }

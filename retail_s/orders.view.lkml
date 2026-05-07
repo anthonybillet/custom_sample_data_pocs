@@ -46,18 +46,63 @@ view: orders {
     drill_fields: [detail*]
   }
 
+  # --- NEW: Logistics Dimensions ---
+  dimension: is_returned {
+    type: yesno
+    description: "Was this order returned?"
+    sql: ${status} = 'Returned' OR ${TABLE}.returned_at IS NOT NULL ;;
+  }
+
+  dimension: days_to_ship {
+    type: number
+    description: "Days between order creation and shipping"
+    sql: DATE_DIFF(${TABLE}.shipped_at, ${TABLE}.created_at, DAY) ;;
+  }
+
+  dimension: days_to_deliver {
+    type: number
+    description: "Days between shipping and delivery"
+    sql: DATE_DIFF(${TABLE}.delivered_at, ${TABLE}.shipped_at, DAY) ;;
+  }
+
+  # --- NEW: Operational Measures ---
+
+  measure: returned_count {
+    type: count
+    description: "Count of returned orders"
+    filters: [is_returned: "yes"]
+  }
+
+  measure: return_rate {
+    type: number
+    description: "Percentage of orders that were returned"
+    sql: 1.0 * ${returned_count} / NULLIF(${count}, 0) ;;
+    value_format_name: percent_2
+  }
+
+  measure: average_days_to_ship {
+    type: average
+    sql: ${days_to_ship} ;;
+    value_format_name: decimal_1
+  }
+
+  # ----- Sets of fields for drilling ------
+  set: detail {
+    fields: [order_id, stores.store_id, stores.store_name, users.user_id, users.last_name, users.first_name, order_items.count]
+  }
+
   # ----- Sets of fields for drilling ------
   set: detail {
     fields: [
-	order_id,
-	stores.store_id,
-	stores.manager_name,
-	stores.store_name,
-	users.user_id,
-	users.last_name,
-	users.first_name,
-	order_items.count
-	]
+  order_id,
+  stores.store_id,
+  stores.manager_name,
+  stores.store_name,
+  users.user_id,
+  users.last_name,
+  users.first_name,
+  order_items.count
+  ]
   }
 
 }

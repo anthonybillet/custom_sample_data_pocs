@@ -25,6 +25,6 @@ view: stores {
   }
   measure: count {
     type: count
-    drill_fields: [store_id, manager_name, store_name, orders.count]
+    drill_fields: [store_id, manager_name, store_name]
   }
 }

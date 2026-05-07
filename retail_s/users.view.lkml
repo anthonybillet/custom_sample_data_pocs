@@ -44,4 +44,32 @@ view: users {
     type: count
     drill_fields: [user_id, last_name, first_name, orders.count]
   }
+
+# --- NEW: User Demographics & Cohorts ---
+  dimension: full_name {
+    type: string
+    description: "User's combined first and last name"
+    sql: CONCAT(${TABLE}.first_name, ' ', ${TABLE}.last_name) ;;
+  }
+
+  dimension: days_since_signup {
+    type: number
+    description: "Number of days since the user created their account"
+    sql: DATE_DIFF(CURRENT_TIMESTAMP(), ${TABLE}.created_at, DAY) ;;
+  }
+
+  dimension: is_new_customer {
+    type: yesno
+    description: "User account created in the last 30 days"
+    sql: ${days_since_signup} <= 30 ;;
+  }
+
+  dimension: user_tenure_tier {
+    type: tier
+    description: "Grouped by days since signup"
+    tiers: [30, 90, 180, 365, 730]
+    style: integer
+    sql: ${days_since_signup} ;;
+  }
+
 }

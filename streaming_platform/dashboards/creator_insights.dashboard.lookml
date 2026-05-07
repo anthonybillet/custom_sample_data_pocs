@@ -127,6 +127,24 @@
     width: 24
     height: 2
     tab_name: ''
+  - name: audience_dropoff_bar
+    title: "Audience Drop-off (100% Stacked)"
+    type: looker_bar
+    model: streaming_platform
+    explore: sessions
+    measures: [sessions.count_left_early, sessions.count_watched_only, sessions.count_interacted_only, tips.funnel_4_tipped]
+    stacking: percent
+    color_application:
+      collection_id: legacy
+      palette_id: legacy_categorical
+    series_colors:
+      sessions.count_left_early: "#e0e0e0"
+      sessions.count_watched_only: "#85c1e9"
+      sessions.count_interacted_only: "#2ecc71"
+      tips.funnel_4_tipped: "#27ae60"
+    show_value_labels: true
+    y_axis_gridlines: false
+    show_y_axis_labels: false
   - title: How Long They Stay
     name: How Long They Stay
     model: streaming_platform
@@ -294,6 +312,16 @@
     width: 24
     height: 2
     tab_name: ''
+  - name: tag_wordcloud
+    title: "Recommended Tags (Word Cloud)"
+    type: looker_wordcloud
+    model: streaming_platform
+    explore: hashtag_affinity
+    dimensions: [hashtag_affinity.exploring_hashtag]
+    measures: [hashtag_affinity.average_affinity]
+    color_application:
+      collection_id: legacy
+      palette_id: legacy_categorical
   - title: Your Hashtag Performance
     name: Your Hashtag Performance
     model: streaming_platform
@@ -361,6 +389,24 @@
     width: 24
     height: 2
     tab_name: ''
+  - name: tip_menu_tiers
+    title: "Tip Revenue by Price Tier"
+    type: looker_bar
+    model: streaming_platform
+    explore: sessions
+    dimensions: [tips.price_tier]
+    measures: [tips.total_tokens]
+    color_application:
+      collection_id: legacy
+      palette_id: legacy_categorical
+    series_colors:
+      '1. Small tips (≤50)': "#27ae60"
+      '2. Mid-range (51-200)': "#f39c12"
+      '3. Big tips (200+)': "#e74c3c"
+    show_value_labels: true
+    y_axis_gridlines: false
+    show_y_axis_labels: true
+    show_x_axis_label: false
   - title: What Your Tippers Buy From You
     name: What Your Tippers Buy From You
     model: streaming_platform
@@ -421,13 +467,97 @@
     type: looker_grid
     fields: [tips.tip_day_of_week, tips.count_tips, tips.tip_hour_of_day]
     pivots: [tips.tip_hour_of_day]
+    filters:
+      tips.tip_day_of_week: Monday,Tuesday,Wednesday,Friday,Thursday,Saturday,Sunday
+    sorts: [tips.tip_hour_of_day, tips.tip_day_of_week]
+    limit: 5000
+    column_limit: 50
     show_view_names: false
     show_row_numbers: false
-    truncate_column_names: false
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    limit_displayed_rows: false
     enable_conditional_formatting: true
-    conditional_formatting: [{type: along a scale, value_format: !!null '', background_color: "#1f3e5a",
-        font_color: !!null '', color_application: {collection_id: legacy, palette_id: legacy_sequential1},
-        bold: false, italic: false, strikethrough: false, fields: []}]
+    header_text_alignment: center
+    header_font_size: '12'
+    rows_font_size: 12
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    show_sql_query_menu_options: false
+    show_totals: true
+    show_row_totals: true
+    truncate_header: false
+    minimum_column_width: 75
+    series_cell_visualizations:
+      tips.count_tips:
+        is_active: false
+    series_text_format:
+      tips.count_tips:
+        align: center
+    table_show_footer: false
+    table_enable_pagination: false
+    table_page_size_options: 20, 50, 100
+    table_column_hover_highlight_enable: false
+    table_show_headers: true
+    header_font_bold: false
+    header_font_italic: false
+    cell_font_size: '12'
+    cell_font_weight: ''
+    cell_font_style: ''
+    cell_text_alignment: ''
+    table_custom_border_enable: false
+    table_custom_border_width:
+    table_custom_border_color: "#dde2eb"
+    table_custom_border_style: solid
+    conditional_formatting: [{type: along a scale..., value_format: !!null '', fields: !!null '',
+        cell_format: {background_color: "#1f3e5a", font_color: !!null '', color_application: {
+            collection_id: streaming-platform, palette_id: streaming-platform-sequential-1,
+            options: {steps: 5}}, font_style: {bold: false, italic: false, strikethrough: false}},
+        apply_formatting_to_row: false, row_format: {background_color: !!null '',
+          font_color: !!null '', color_application: {collection_id: streaming-platform,
+            options: {mirror: false, reverse: false, stepped: false}}, font_style: {
+            bold: false, italic: false, strikethrough: false}}, apply_to: allNumericFields,
+        stringValue: '', value: !!null ''}]
+    series_tooltip_options:
+      tips.count_tips:
+        custom_tooltips_enabled: false
+        style:
+          font_size: 12
+          font_family: Roboto, 'Noto Sans', 'Noto Sans JP', 'Noto Sans CJK KR', 'Noto
+            Sans Arabic UI', 'Noto Sans Devanagari UI', 'Noto Sans Hebrew', 'Noto
+            Sans Thai UI', Helvetica, Arial, sans-serif
+          font_color: "#FFFFFF"
+          background_color: "#262D33"
+          border_radius: 4
+          border_color: transparent
+          box_shadow: none
+          align: left
+        template: |2-
+
+                      <div style="padding: 5px 0;">
+                      <div>Day of Week</div>
+                      <div style="font-weight: bold;">{{ tips.tip_day_of_week }}</div>
+                    </div><div style="padding: 5px 0;">
+                <div>Tips Count Tips</div>
+                <dl>
+                  <dt>12</dt>
+                      <dd>{{12__tips.count_tips}}</dd><dt>13</dt>
+                      <dd>{{13__tips.count_tips}}</dd><dt>14</dt>
+                      <dd>{{14__tips.count_tips}}</dd><dt>15</dt>
+                      <dd>{{15__tips.count_tips}}</dd><dt>16</dt>
+                      <dd>{{16__tips.count_tips}}</dd><dt>17</dt>
+                      <dd>{{17__tips.count_tips}}</dd><dt>18</dt>
+                      <dd>{{18__tips.count_tips}}</dd><dt>19</dt>
+                      <dd>{{19__tips.count_tips}}</dd><dt>EMPTY</dt>
+                      <dd>{{EMPTY__tips.count_tips}}</dd>
+                </dl>
+              </div>
+    truncate_column_names: false
+    defaults_version: 1
     listen: {}
     row: 51
     col: 0

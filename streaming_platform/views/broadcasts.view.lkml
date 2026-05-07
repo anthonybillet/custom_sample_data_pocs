@@ -1,6 +1,6 @@
 view: broadcasts {
-  sql_table_name: `ant-billet-looker-core-argolis.streaming_platform.broadcasts` ;;
-  drill_fields: [broadcast_id, broadcaster_username, broadcast_start_time, broadcast_end_time]
+  sql_table_name: `ant-billet-looker-core-argolis.streaming_platform.broadcasts_2` ;;
+  drill_fields: [broadcast_id, broadcast_start_time, broadcast_end_time]
 
   dimension: broadcast_id {
     primary_key: yes
@@ -8,10 +8,13 @@ view: broadcasts {
     sql: ${TABLE}.broadcast_id ;;
   }
 
-  dimension: broadcaster_username {
-    type: string
-    sql: ${TABLE}.broadcaster_username ;;
+
+  dimension: creator_id {
+    hidden: yes
+    type: number
+    sql: ${TABLE}.creator_id ;;
   }
+
 
   dimension_group: broadcast_start {
     type: time
