@@ -62,11 +62,14 @@ view: marketing_attribution_demo {
   # ==========================================
   parameter: custom_goal_name {
     type: string
+    suggest_explore: available_goals
+    suggest_dimension: available_goals.goal_type
     description: "Type the name of any goal mapped in your database (e.g., 'newsletter_signup', 'demo_booked')"
   }
 
   measure: dynamic_custom_goal {
     type: number
+    label_from_parameter: custom_goal_name
     description: "Calculates on the fly based on the Custom Goal Name parameter"
     sql: SUM(COALESCE((
           SELECT goal.goal_value
@@ -78,19 +81,12 @@ view: marketing_attribution_demo {
   # ==========================================
   # 3: REQUEST-SHAPE (CENSORING)
   # ==========================================
-  # Note: For the demo, I'm using a parameter so you can toggle it live on the call.
-  # In production, this would be a User Attribute: _user_attributes['is_censorable']
-  parameter: simulate_feature_flag_censoring {
-    type: unquoted
-    allowed_value: { label: "Flag ON (Censor Data)" value: "yes" }
-    allowed_value: { label: "Flag OFF (Raw Data)" value: "no" }
-    default_value: "yes"
-  }
 
   measure: censored_revenue {
     type: number
+    description: "Automatically zeros out Meta revenue if impressions are under 100 for flagged tenants."
     sql:
-      {% if simulate_feature_flag_censoring._parameter_value == 'yes' %}
+      {% if _user_attributes['is_censorable'] == 'yes' %}
         CASE
           WHEN ${platform} = 'Meta' AND ${dynamic_impressions} < 100 THEN 0
           ELSE ${dynamic_revenue}
