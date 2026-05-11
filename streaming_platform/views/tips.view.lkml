@@ -62,7 +62,10 @@ view: tips {
 
   # Completes the funnel
   measure: funnel_4_tipped {
-    label: "4. Tipped"
+    view_label: "Sessions"
+    group_label: "Funnel"
+    group_item_label: "4) Tipped"
+    label: "Tipped"
     type: count_distinct
     sql: ${user_id} ;;
   }
@@ -70,9 +73,9 @@ view: tips {
   dimension: price_tier {
     type: string
     sql: CASE
-          WHEN ${tokens} <= 50 THEN '1. Small tips (≤50)'
-          WHEN ${tokens} <= 200 THEN '2. Mid-range (51-200)'
-          ELSE '3. Big tips (200+)'
+          WHEN ${tokens} <= 50 THEN ' Small tips (≤50)'
+          WHEN ${tokens} <= 200 THEN '  Mid-range (51-200)'
+          ELSE '  Big tips (200+)'
          END ;;
   }
 

@@ -44,3 +44,17 @@ explore: sessions {
   }
 
 }
+
+explore: followers {
+  label: "Follower Growth"
+  # Apply the same RLS so creators only see their own follower growth
+  access_filter: {
+    user_attribute: creator_id
+    field: creator_id
+  }
+  join: users {
+    type: left_outer
+    sql_on: ${followers.user_id} = ${users.user_id} ;;
+    relationship: many_to_one
+  }
+}

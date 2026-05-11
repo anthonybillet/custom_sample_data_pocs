@@ -41,12 +41,12 @@ view: sessions {
   dimension: duration_bucket {
     type: string
     sql: CASE
-          WHEN ${duration_seconds} <= 60 THEN '1. ≤1 min'
-          WHEN ${duration_seconds} > 60 AND ${duration_seconds} <= 300 THEN '2. 1–5 min'
-          WHEN ${duration_seconds} > 300 AND ${duration_seconds} <= 900 THEN '3. 5–15 min'
-          WHEN ${duration_seconds} > 900 AND ${duration_seconds} <= 1800 THEN '4. 15–30 min'
-          WHEN ${duration_seconds} > 1800 AND ${duration_seconds} <= 3600 THEN '5. 30–60 min'
-          ELSE '6. 60+ min'
+          WHEN ${duration_seconds} <= 60 THEN '     ≤1 min'
+          WHEN ${duration_seconds} > 60 AND ${duration_seconds} <= 300 THEN '    1–5 min'
+          WHEN ${duration_seconds} > 300 AND ${duration_seconds} <= 900 THEN '   5–15 min'
+          WHEN ${duration_seconds} > 900 AND ${duration_seconds} <= 1800 THEN '  15–30 min'
+          WHEN ${duration_seconds} > 1800 AND ${duration_seconds} <= 3600 THEN ' 30–60 min'
+          ELSE '60+ min'
          END ;;
   }
 
@@ -77,20 +77,26 @@ view: sessions {
 
   # --- Funnel Measures ---
   measure: funnel_1_room_entries {
-    label: "1. Room Entries"
+    group_label: "Funnel"
+    group_item_label: "1) Room Entries"
+    label: "Room Entries"
     type: count_distinct
     sql: ${user_id} ;;
   }
 
   measure: funnel_2_watched_1_min {
-    label: "2. Watched 1+ Min"
+    group_label: "Funnel"
+    group_item_label: "2) Watched 1+ Min"
+    label: "Watched 1+ Min"
     type: count_distinct
     sql: ${user_id} ;;
     filters: [duration_seconds: ">60"]
   }
 
   measure: funnel_3_interacted {
-    label: "3. Interacted"
+    group_label: "Funnel"
+    group_item_label: "3) Interacted"
+    label: "Interacted"
     type: count_distinct
     sql: ${user_id} ;;
     filters: [interacted_in_chat: "yes"]

@@ -51,6 +51,11 @@ view: marketing_attribution_demo {
     value_format_name: usd
   }
 
+  measure: deriverd_metric {
+    type: number
+    sql: 1.0* ${dynamic_revenue} / NULLIF(${dynamic_impressions},0);;
+  }
+
   measure: dynamic_impressions {
     hidden: yes # Hidden because we only use it for the censoring logic below
     type: sum
