@@ -139,4 +139,25 @@ view: sessions {
     value_format: "0.0 \"m\""
     sql: 1.0*${duration_seconds}/60 ;;
   }
+
+  measure: tokens_per_viewer {
+    type: number
+    description: "Average tokens spent per unique viewer."
+    sql: 1.0 * ${tips.total_tokens} / NULLIF(${sessions.count_unique_viewers}, 0) ;;
+    value_format_name: decimal_2
+  }
+
+  measure: tip_rate {
+    type: number
+    description: "Percentage of room entries that result in a tip."
+    sql: 100.0 * ${tips.funnel_4_tipped} / NULLIF(${sessions.funnel_1_room_entries}, 0) ;;
+    value_format_name: decimal_1
+  }
+
+  measure: watch_to_tip_rate {
+    type: number
+    description: "Percentage of viewers who watched 1+ min that go on to tip."
+    sql: 100.0 * ${tips.funnel_4_tipped} / NULLIF(${sessions.funnel_2_watched_1_min}, 0) ;;
+    value_format_name: decimal_1
+  }
 }

@@ -1,7 +1,7 @@
 connection: "argolis"
 
 include: "/streaming_platform/views/**/*.view.lkml"
-include: "/streaming_platform/dashboards/*.dashboard.lookml"
+# include: "/streaming_platform/dashboards/*.dashboard.lookml"
 
 explore: sessions {
   access_filter: {

@@ -96,8 +96,8 @@ view: tips {
           ELSE 0.5 END) +
 
     -- Recommendation Index component (Assuming rec_idx is calculated elsewhere)
-    --(CASE WHEN ${rec_idx} > 100 THEN 2.0
-     --     WHEN ${rec_idx} > 80 THEN 1.0
+    --(CASE WHEN rec_idx > 100 THEN 2.0
+     --     WHEN rec_idx > 80 THEN 1.0
      --     ELSE 0.0 END) +
 
     -- Entry funnel component[cite: 4]
@@ -108,6 +108,61 @@ view: tips {
     -- Monetization component
     (CASE WHEN ${tokens_per_viewer} < 30 THEN 1.0
           ELSE 0.0 END) ;;
+  }
+
+   measure: score_hidden_gem {
+    view_label: "Z) Creator Score Calcs"
+    type: number
+    description: "The Hidden Gem: Great retention + spend, poor discovery"
+    sql:
+     -- Bounce delta component (requires platform average comparison)
+    -- (CASE WHEN bounce_delta < -3 THEN 3.0
+    --      WHEN bounce_delta < -2 THEN 1.5
+    --       ELSE 0.0 END) +
+
+    -- Long stay retention component (requires platform average comparison)
+   -- (CASE WHEN long_stay_pct > long_stay_avg + 5 THEN 2.5
+     --     WHEN long_stay_pct > long_stay_avg + 2 THEN 1.0
+       --   ELSE 0.0 END) +
+
+    -- Discovery / Recommendation Index component
+    --(CASE WHEN rec_idx} < 60 THEN 3.0
+      --    WHEN rec_idx} < 75 THEN 1.5
+        --  ELSE 0.0 END) +
+
+    -- Monetization component
+    (CASE WHEN ${tokens_per_viewer} > 50 THEN 1.5
+          WHEN ${tokens_per_viewer} > 20 THEN 0.5
+          ELSE 0.0 END) ;;
+    value_format_name: decimal_1
+  }
+
+  measure: score_whale_whisperer {
+    view_label: "Z) Creator Score Calcs"
+    type: number
+    description: "The Whale Whisperer: Few visitors, but they spend big."
+    sql:
+    -- Tokens per viewer component
+    (CASE WHEN ${tokens_per_viewer} > 100 THEN 3.5
+          WHEN ${tokens_per_viewer} > 60 THEN 2.5
+          WHEN ${tokens_per_viewer} > 30 THEN 1.5
+          WHEN ${tokens_per_viewer} > 10 THEN 1.0
+          ELSE 0.0 END) +
+
+    -- Viewers component
+    (CASE WHEN ${sessions.count_unique_viewers} < 150 THEN 1.5
+          WHEN ${sessions.count_unique_viewers} < 300 THEN 0.5
+          ELSE 0.0 END) +
+
+    -- Tip rate component
+    (CASE WHEN ${sessions.tip_rate} > 5 THEN 2.0
+          WHEN ${sessions.tip_rate} > 2 THEN 1.0
+          ELSE 0.0 END) +
+
+    -- Watch-to-tip conversion component
+    (CASE WHEN ${sessions.watch_to_tip_rate} > 8 THEN 1.0
+          ELSE 0.0 END) ;;
+    value_format_name: decimal_1
   }
 
   measure: max_archetype_score {
@@ -125,8 +180,33 @@ view: tips {
         WHEN ${max_archetype_score} = ${score_hidden_gem} THEN 'The Hidden Gem'
         WHEN ${max_archetype_score} = ${score_crowd_pleaser} THEN 'The Crowd Pleaser'
         WHEN ${max_archetype_score} = ${score_whale_whisperer} THEN 'The Whale Whisperer'
-        -- ... add all 10 here
+        ELSE 'The Hidden Gem'
        END ;;
+  }
+
+  measure: archetype_summary_card {
+    view_label: "Z) Creator Score Calcs"
+    type: string
+    sql: ${creator_archetype} ;;
+    html:
+    {% assign color = "#000" %}
+    {% if value == 'The Hidden Gem' %}{% assign color = "#1abc9c" %}{% endif %}
+    {% if value == 'The Crowd Pleaser' %}{% assign color = "#8e44ad" %}{% endif %}
+
+    <div style="background:#f9f9f9; border-radius:10px; padding:24px 28px; border-left:4px solid {{ color }}; font-family:sans-serif;">
+        <div style="display:flex; align-items:center; gap:14px; margin-bottom:10px;">
+           <span style="display:inline-block; background:{{ color }}; color:#fff; font-size:11px; font-weight:600; border-radius:4px; padding:5px 12px; letter-spacing:0.4px;">
+             {{ value }}
+           </span>
+        </div>
+        <div style="font-size:14px; color:#444; line-height:1.6;">
+            <!-- You can use basic Liquid conditional statements here for the explanation text -->
+            {% if value == 'The Crowd Pleaser' %}
+               With {{ sessions.count_unique_viewers._rendered_value }} viewers, this room draws a crowd.
+            {% endif %}
+        </div>
+    </div>
+  ;;
   }
 
 }
