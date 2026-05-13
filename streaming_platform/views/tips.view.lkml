@@ -1,6 +1,6 @@
 view: tips {
   sql_table_name: `ant-billet-looker-core-argolis.streaming_platform.tips_2` ;;
-  drill_fields: [tip_id, tip_time, menu_item, tokens]
+  drill_fields: [tip_id, tip_time, creators.username, users.user_id, menu_item, tokens]
 
   dimension: tip_id {
     primary_key: yes

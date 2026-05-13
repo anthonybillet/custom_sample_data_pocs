@@ -1,6 +1,6 @@
 view: users {
   sql_table_name: `ant-billet-looker-core-argolis.streaming_platform.users_2` ;;
-  drill_fields: [user_id, country, device_type, is_follower]
+  drill_fields: [user_id, country, device_type]
 
   dimension: user_id {
     primary_key: yes

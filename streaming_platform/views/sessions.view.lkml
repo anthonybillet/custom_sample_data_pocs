@@ -1,6 +1,6 @@
 view: sessions {
   sql_table_name: `ant-billet-looker-core-argolis.streaming_platform.sessions_2` ;;
-  drill_fields: [session_id, users.user_id, duration_seconds, traffic_source]
+  drill_fields: [session_id, session_start_time, creators.username, users.user_id, entry_hashtag,traffic_source, duration_seconds, duration_bucket, tips.count_tips]
 
   dimension: session_id {
     primary_key: yes

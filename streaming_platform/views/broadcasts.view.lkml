@@ -1,6 +1,6 @@
 view: broadcasts {
   sql_table_name: `ant-billet-looker-core-argolis.streaming_platform.broadcasts_2` ;;
-  drill_fields: [broadcast_id, broadcast_start_time, broadcast_end_time]
+  drill_fields: [broadcast_id, broadcast_start_time, broadcast_end_time, sessions.count_sessions, tips.count_tips,users.count_users]
 
   dimension: broadcast_id {
     primary_key: yes
@@ -35,5 +35,6 @@ view: broadcasts {
   measure: count_broadcast_days {
     type: count_distinct
     sql: CAST(${broadcast_start_date} AS STRING) ;;
+    drill_fields: [broadcast_start_date,count_broadcasts]
   }
 }
