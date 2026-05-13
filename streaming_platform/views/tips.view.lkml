@@ -79,4 +79,54 @@ view: tips {
          END ;;
   }
 
+  measure: tokens_per_viewer {
+    type: number
+    value_format_name: decimal_2
+    sql: 1.0 * ${total_tokens} / NULLIF(${sessions.count_unique_viewers}, 0) ;;
+  }
+
+  measure: score_crowd_pleaser {
+    view_label: "Z) Creator Score Calcs"
+    type: number
+    description: "High reach, broad appeal."
+    sql:
+    -- Viewers component
+    (CASE WHEN ${sessions.count_unique_viewers} > 500 THEN 3.0
+          WHEN ${sessions.count_unique_viewers} > 200 THEN 2.0
+          ELSE 0.5 END) +
+
+    -- Recommendation Index component (Assuming rec_idx is calculated elsewhere)
+    --(CASE WHEN ${rec_idx} > 100 THEN 2.0
+     --     WHEN ${rec_idx} > 80 THEN 1.0
+     --     ELSE 0.0 END) +
+
+    -- Entry funnel component[cite: 4]
+    (CASE WHEN ${sessions.funnel_1_room_entries} > 1000 THEN 1.5
+          WHEN ${sessions.funnel_1_room_entries} > 400 THEN 1.0
+          ELSE 0.0 END) +
+
+    -- Monetization component
+    (CASE WHEN ${tokens_per_viewer} < 30 THEN 1.0
+          ELSE 0.0 END) ;;
+  }
+
+  measure: max_archetype_score {
+    view_label: "Z) Creator Score Calcs"
+    type: number
+    hidden: yes
+    sql: GREATEST(${score_hidden_gem}, ${score_crowd_pleaser}, ${score_whale_whisperer}, ...) ;;
+  }
+
+  measure: creator_archetype {
+    view_label: "Z) Creator Score Calcs"
+    type: string
+    label: "Creator Archetype"
+    sql: CASE
+        WHEN ${max_archetype_score} = ${score_hidden_gem} THEN 'The Hidden Gem'
+        WHEN ${max_archetype_score} = ${score_crowd_pleaser} THEN 'The Crowd Pleaser'
+        WHEN ${max_archetype_score} = ${score_whale_whisperer} THEN 'The Whale Whisperer'
+        -- ... add all 10 here
+       END ;;
+  }
+
 }

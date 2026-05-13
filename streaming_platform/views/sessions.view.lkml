@@ -132,4 +132,11 @@ view: sessions {
     # Note: In a full setup, you'd filter out users who tipped.
     filters: [interacted_in_chat: "yes"]
   }
+
+  measure: average_session_duration_minutes {
+    label: "Avg Session Duration (Minutes)"
+    type: average
+    value_format: "0.0 \"m\""
+    sql: 1.0*${duration_seconds}/60 ;;
+  }
 }
