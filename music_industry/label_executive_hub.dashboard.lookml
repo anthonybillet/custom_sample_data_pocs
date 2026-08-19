@@ -8,7 +8,7 @@
   - name: Date Range
     title: Date Range
     type: date_filter
-    default_value: 30 days
+    default_value: 2026
     allow_multiple_values: true
     required: false
   - name: Artist Name
